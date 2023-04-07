@@ -1,6 +1,14 @@
 #include "Core/Window.h"
 #include "Core/Debug.h"
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+extern "C"
+{
+	__declspec(dllexport) unsigned long NvOptimusEnablement = 1;
+	__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+}
+
 
 namespace co
 {
@@ -9,24 +17,24 @@ namespace co
 	{
 	}
 	Window::Window(const ContextSettings& contextSettings)
-		: m_Position(50, 50), m_Size(800, 600), m_Title("FemtoEngine App"), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
+		: m_Position(50, 50), m_Size(800, 600), m_Title("COFX App"), m_Context(contextSettings), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
 	{
 		if (!glfwInit())
 		{
-			Debug::Critical("Femto::Core::Window; Failed to initialize GLFW.");
+			Debug::Critical("cofx::Core::Window; Failed to initialize GLFW.");
 			return;
 		}
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, contextSettings.OpenGLMajorVersion);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, contextSettings.OpenGLMinorVersion);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_Context.OpenGLMajorVersion);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_Context.OpenGLMinorVersion);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, contextSettings.Debug);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, m_Context.Debug);
 
 		m_Monitor = glfwGetPrimaryMonitor();
 
 		m_Window = glfwCreateWindow(m_Size.X, m_Size.Y, m_Title.c_str(), m_FullScreen ? m_Monitor : nullptr, nullptr);
 		if (m_Window == nullptr)
 		{
-			Debug::Critical("Femto::Core::Window; Failed to create GLFWwindow.");
+			Debug::Critical("cofx::Core::Window; Failed to create GLFWwindow.");
 			return;
 		}
 		glfwSetWindowPos(m_Window, m_Position.X, m_Position.Y);
@@ -36,6 +44,15 @@ namespace co
 		glfwFocusWindow(m_Window);
 
 		glfwSetWindowUserPointer(m_Window, this);
+
+		glewExperimental = GL_TRUE;
+		GLenum result = glewInit();
+		if (result != GLEW_OK)
+		{
+			CO_CRITICAL("cofx::Core::Window; Failed to initialize GLEW. {}", (const char*)glewGetErrorString(result));
+			return;
+		}
+		glfwSetFramebufferSizeCallback(m_Window, GLFWFrameBufferSizeCallback);
 	}
 	Window::~Window()
 	{
@@ -134,6 +151,21 @@ namespace co
 		m_Resizable = resizable;
 		glfwSetWindowAttrib(m_Window, GLFW_RESIZABLE, m_Resizable);
 	}
+	void Window::Clear(const Color& color)
+	{
+		glClearColor(static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f), static_cast<float>(color.A / 255.f));
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Advanced?
+	}
+	std::string_view Window::GetHardWareInfo() const
+	{
+		auto renderer = (const char*)glGetString(GL_RENDERER);
+		return renderer;
+	}
+	void Window::GetGLVersion(unsigned int& major, unsigned int& minor) const
+	{
+		major = m_Context.OpenGLMajorVersion;
+		minor = m_Context.OpenGLMinorVersion;
+	}
 	void Window::Close()
 	{
 		glfwSetWindowShouldClose(m_Window, true);
@@ -155,7 +187,7 @@ namespace co
 			glfwTerminate();
 		}
 	}
-	void Window::GLFWSizeCallback(GLFWwindow* window, int width, int height)
+	void Window::GLFWFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 	{
 		auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 		if (!self.m_FullScreen)
@@ -163,5 +195,6 @@ namespace co
 			self.m_Size.X = width;
 			self.m_Size.Y = height;
 		}
+		glViewport(0, 0, width, height);
 	}
 }

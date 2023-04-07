@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <utility>
+#include "../Graphics/Color.h"
 #include "../System/Vector2.h"
 #include "ContextSettings.h"
 
@@ -15,6 +17,7 @@ namespace co
 		Vec2u m_Position;
 		Vec2u m_Size;
 		std::string m_Title;
+		ContextSettings m_Context;
 
 		bool m_FullScreen;
 		bool m_Resizable;
@@ -44,11 +47,15 @@ namespace co
 		void SetFullScreen(bool fullScreen);
 		void SetResizable(bool resizable);
 
+		void Clear(const Color& color);
+		std::string_view GetHardWareInfo() const;
+		void GetGLVersion(unsigned int& major, unsigned int& minor) const;
+
 		void Close();
 		bool IsRunning() const;
 		void Update() const;
 		void Cleanup();
 	private:
-		static void GLFWSizeCallback(GLFWwindow* window, int width, int height);
+		static void GLFWFrameBufferSizeCallback(GLFWwindow* window, int width, int height);
 	};
 }

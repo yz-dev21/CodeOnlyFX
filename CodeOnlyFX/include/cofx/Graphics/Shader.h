@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Color.h"
-#include "Transform.h"
+#include "Matrix.h"
 
 namespace co
 {
@@ -29,7 +29,7 @@ namespace co
 		void SetUniform(std::string_view name, int value) const;
 		void SetUniform(std::string_view name, float value) const;
 		void SetUniform(std::string_view name, const Color& color) const;
-		void SetUniform(std::string_view name, const Transform& transform) const;
+		void SetUniform(std::string_view name, const Matrix& matrix) const;
 
 		void Cleanup();
 	private:

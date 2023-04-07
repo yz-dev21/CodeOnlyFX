@@ -10,6 +10,7 @@ namespace co
 	{
 		m_Image.assign(rawImage.begin(), rawImage.end());
 
+		glGenTextures(1, &m_Texture);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, rawImage.data());
 
@@ -36,7 +37,7 @@ namespace co
 	{
 		return m_Image;
 	}
-	Vec2f Texture::GetSize() const
+	Vec2u Texture::GetSize() const
 	{
 		return m_Size;
 	}

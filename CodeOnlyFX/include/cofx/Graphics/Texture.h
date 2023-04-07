@@ -11,7 +11,7 @@ namespace co
 	private:
 		unsigned int m_Texture;
 		std::vector<unsigned char> m_Image;
-		Vec2f m_Size;
+		Vec2u m_Size;
 	public:
 		Texture();
 		Texture(unsigned int width, unsigned int height, std::span<unsigned char> rawImage);
@@ -21,7 +21,7 @@ namespace co
 		void GenerateMipmap() const;
 
 		const std::vector<unsigned char>& GetImage() const;
-		Vec2f GetSize() const;
+		Vec2u GetSize() const;
 
 		void Cleanup();
 	};

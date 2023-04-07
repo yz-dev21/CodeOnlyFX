@@ -1,10 +1,10 @@
 #include "Graphics/SpriteBatch.h"
-#include "Graphics/Transform.h"
+#include "Graphics/Matrix.h"
 #include <GL/glew.h>
 
 namespace co
 {
-	SpriteBatch::SpriteBatch() : m_Shader(nullptr), m_QuadVAO(NULL)
+	SpriteBatch::SpriteBatch() : m_Shader(nullptr), m_QuadVAO(NULL), m_InPair(false)
 	{
 		unsigned int VBO;
 		float vertices[] = {
@@ -33,30 +33,32 @@ namespace co
 	void SpriteBatch::Begin(Shader* shader)
 	{
 		m_Shader = shader;
+		m_InPair = true;
 	}
 	void SpriteBatch::Draw(Texture* texture, const Vec2f& position, const Vec2f& size, const Color& color, float rotate)
 	{
+		if (!m_InPair)
+			return;
+
 		m_Shader->Bind();
-		Transform model;
+		Matrix model;
 
 		// Move
 		model.Translate(position);
 
 		// Rotate
-		//if (rotate.ToDegrees() != 0.f)
-		//{
-		//	model.Translate(cu::Vector2f(0.5f * size.X, 0.5f * size.Y)); // Move to center of quad
-		//	// model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
-		//	model.Translate(cu::Vector2f(-0.5f * size.X, -0.5f * size.Y)); // Move back to origin
-		//}
+		if (rotate != 0.f)
+		{
+			model.Translate(Vec2f(0.5f * size.X, 0.5f * size.Y)); // Move to center of quad
+			model.Rotate(rotate);
+			model.Translate(Vec2f(-0.5f * size.X, -0.5f * size.Y)); // Move back to origin
+		}
 
 		// Scale
-		if (size == Vec2f::Zero)
-			model.Scale(texture->GetSize());
-		else
-			model.Scale(size);
+		model.Scale(size);
 
 		m_Shader->SetUniform("model", model);
+		m_Shader->SetUniform("spriteColor", color);
 
 		glActiveTexture(GL_TEXTURE0);
 		texture->Bind();
@@ -67,6 +69,7 @@ namespace co
 	}
 	void SpriteBatch::End()
 	{
+		m_InPair = false;
 		m_Shader = nullptr;
 	}
 }

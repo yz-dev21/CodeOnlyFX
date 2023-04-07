@@ -56,9 +56,9 @@ namespace co
 	{
 		glUniform3f(glGetUniformLocation(m_Shader, name.data()), static_cast<float>(color.R), static_cast<float>(color.G), static_cast<float>(color.B));
 	}
-	void Shader::SetUniform(std::string_view name, const Transform& transform) const
+	void Shader::SetUniform(std::string_view name, const Matrix& matrix) const
 	{
-		glUniformMatrix4fv(glGetUniformLocation(m_Shader, name.data()), 1, false, transform.GetMatrix().data());
+		glUniformMatrix4fv(glGetUniformLocation(m_Shader, name.data()), 1, false, matrix.GetRawMatrix().data());
 	}
 	void Shader::Cleanup()
 	{

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Graphics/Shader.h"
-#include "Graphics/Texture.h"
+#include "Shader.h"
+#include "Texture.h"
 
 namespace co
 {
@@ -10,6 +10,7 @@ namespace co
 	private:
 		Shader* m_Shader;
 		unsigned int m_QuadVAO;
+		bool m_InPair;
 	public:
 		SpriteBatch();
 

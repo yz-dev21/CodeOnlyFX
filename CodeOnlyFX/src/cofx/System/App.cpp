@@ -10,7 +10,6 @@ namespace co
 
 		Debug::Active = m_ContextSettings.Debug;
 		m_Window = std::make_unique<Window>(m_ContextSettings);
-		m_GraphicsDevice = std::make_unique<GraphicsDevice>(m_Window.get(), m_ContextSettings);
 
 		Initialize();
 

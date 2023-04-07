@@ -193,11 +193,10 @@
     <ClInclude Include="include\cofx\Core\Debug.h" />
     <ClInclude Include="include\cofx\Core\Window.h" />
     <ClInclude Include="include\cofx\Graphics\Color.h" />
-    <ClInclude Include="include\cofx\Graphics\GraphicsDevice.h" />
+    <ClInclude Include="include\cofx\Graphics\Matrix.h" />
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\SpriteBatch.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
-    <ClInclude Include="include\cofx\Graphics\Transform.h" />
     <ClInclude Include="include\cofx\System\App.h" />
     <ClInclude Include="include\cofx\System\Timer.h" />
     <ClInclude Include="include\cofx\System\Vector2.h" />
@@ -211,11 +210,10 @@
     <ClCompile Include="src\cofx\Core\Assets.cpp" />
     <ClCompile Include="src\cofx\Core\Debug.cpp" />
     <ClCompile Include="src\cofx\Core\Window.cpp" />
-    <ClCompile Include="src\cofx\Graphics\GraphicsDevice.cpp" />
+    <ClCompile Include="src\cofx\Graphics\Matrix.cpp" />
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
     <ClCompile Include="src\cofx\Graphics\SpriteBatch.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
-    <ClCompile Include="src\cofx\Graphics\Transform.cpp" />
     <ClCompile Include="src\cofx\System\App.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />
   </ItemGroup>

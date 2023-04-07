@@ -30,9 +30,6 @@
     <ClInclude Include="include\cofx\Graphics\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\cofx\Graphics\GraphicsDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -40,9 +37,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cofx\Graphics\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\System\App.h">
@@ -189,6 +183,9 @@
     <ClInclude Include="external\include\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\cofx\Graphics\Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cofx\Core\Assets.inl">
@@ -217,9 +214,6 @@
     <ClCompile Include="src\cofx\System\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cofx\Graphics\GraphicsDevice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cofx\Graphics\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -229,7 +223,7 @@
     <ClCompile Include="src\cofx\Graphics\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cofx\Graphics\Transform.cpp">
+    <ClCompile Include="src\cofx\Graphics\Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
