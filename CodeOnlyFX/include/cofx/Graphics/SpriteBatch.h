@@ -15,7 +15,7 @@ namespace co
 		SpriteBatch();
 
 		void Begin(Shader* shader);
-		void Draw(Texture* texture, const Vec2f& position, const Vec2f& size, const Color& color, float rotate);
+		void Draw(Texture* texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
 		void End();
 	};
 }
