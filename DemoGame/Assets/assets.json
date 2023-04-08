@@ -2,13 +2,13 @@
   "assets": [
     {
       "name": "default",
-      "vertex": "Assets/Shaders/default.vert",
-      "fragment": "Assets/Shaders/default.frag",
+      "vertex": "../../DemoGame/Assets/Shaders/default.vert",
+      "fragment": "../../DemoGame/Assets/Shaders/default.frag",
       "type": 1
     },
     {
       "name": "soldier",
-      "file": "Assets/Gunner_Black_Idle.png",
+      "file": "../../DemoGame/Assets/Gunner_Black_Idle.png",
       "type": 2
     }
   ]

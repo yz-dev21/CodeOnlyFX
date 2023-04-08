@@ -31,13 +31,13 @@ namespace co
 
 		m_Monitor = glfwGetPrimaryMonitor();
 
-		m_Window = glfwCreateWindow(m_Size.X, m_Size.Y, m_Title.c_str(), m_FullScreen ? m_Monitor : nullptr, nullptr);
+		m_Window = glfwCreateWindow(m_Size.x, m_Size.y, m_Title.c_str(), m_FullScreen ? m_Monitor : nullptr, nullptr);
 		if (m_Window == nullptr)
 		{
 			Debug::Critical("cofx::Core::Window; Failed to create GLFWwindow.");
 			return;
 		}
-		glfwSetWindowPos(m_Window, m_Position.X, m_Position.Y);
+		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 
 		glfwMakeContextCurrent(m_Window);
 
@@ -62,60 +62,60 @@ namespace co
 	{
 		return m_Window;
 	}
-	Vec2u Window::GetPosition() const
+	const glm::uvec2& Window::GetPosition() const
 	{
 		return m_Position;
 	}
 	void Window::SetPosX(unsigned int x)
 	{
-		if (m_Position.X == x) return;
+		if (m_Position.x == x) return;
 
-		m_Position.X = x;
-		glfwSetWindowPos(m_Window, m_Position.X, m_Position.Y);
+		m_Position.x = x;
+		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
 	void Window::SetPosY(unsigned int y)
 	{
-		if (m_Position.Y == y) return;
+		if (m_Position.y == y) return;
 
-		m_Position.Y = y;
-		glfwSetWindowPos(m_Window, m_Position.X, m_Position.Y);
+		m_Position.x = y;
+		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
 	void Window::SetPosition(unsigned int x, unsigned int y)
 	{
-		if (m_Position.X == x && m_Position.Y == y) return;
+		if (m_Position.x == x && m_Position.y == y) return;
 
-		m_Position.X = x;
-		m_Position.Y = y;
-		glfwSetWindowPos(m_Window, m_Position.X, m_Position.Y);
+		m_Position.x = x;
+		m_Position.y = y;
+		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
-	Vec2u Window::GetSize() const
+	const glm::uvec2& Window::GetSize() const
 	{
 		return m_Size;
 	}
 	void Window::SetWidth(unsigned int width)
 	{
-		if (m_Size.X == width) return;
+		if (m_Size.x == width) return;
 
-		m_Size.X = width;
-		glfwSetWindowSize(m_Window, m_Size.X, m_Size.Y);
+		m_Size.x = width;
+		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
 	void Window::SetHeight(unsigned int height)
 	{
-		if (m_Size.Y == height) return;
+		if (m_Size.y == height) return;
 
-		m_Size.Y = height;
-		glfwSetWindowSize(m_Window, m_Size.X, m_Size.Y);
+		m_Size.y = height;
+		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
 	void Window::SetSize(unsigned int width, unsigned int height)
 	{
-		if (m_Size.X != width)
-			m_Size.X = width;
+		if (m_Size.x != width)
+			m_Size.x = width;
 
-		if (m_Size.Y != height)
-			m_Size.Y = height;
+		if (m_Size.y != height)
+			m_Size.y = height;
 
-		if (m_Size.X != width || m_Size.Y != height)
-			glfwSetWindowSize(m_Window, m_Size.X, m_Size.Y);
+		if (m_Size.x != width || m_Size.y != height)
+			glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
 	const std::string& Window::GetTitle() const
 	{
@@ -140,7 +140,7 @@ namespace co
 		}
 		else
 		{
-			glfwSetWindowMonitor(m_Window, nullptr, m_Position.X, m_Position.Y, m_Size.X, m_Size.Y, 0);
+			glfwSetWindowMonitor(m_Window, nullptr, m_Position.x, m_Position.y, m_Size.x, m_Size.y, 0);
 			SetResizable(true);
 		}
 	}
@@ -192,8 +192,8 @@ namespace co
 		auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 		if (!self.m_FullScreen)
 		{
-			self.m_Size.X = width;
-			self.m_Size.Y = height;
+			self.m_Size.x = width;
+			self.m_Size.y = height;
 		}
 		glViewport(0, 0, width, height);
 	}

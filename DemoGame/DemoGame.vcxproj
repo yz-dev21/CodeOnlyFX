@@ -141,7 +141,7 @@
   <ItemGroup>
     <None Include="Assets\assets.json" />
     <None Include="Assets\Shaders\default.vert" />
-    <None Include="Assets\Shaders\defualt.frag" />
+    <None Include="Assets\Shaders\default.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Gunner_Black_Idle.png" />

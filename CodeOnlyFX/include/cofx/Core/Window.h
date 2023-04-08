@@ -3,7 +3,7 @@
 #include <string>
 #include <utility>
 #include "../Graphics/Color.h"
-#include "../System/Vector2.h"
+#include "../glm/vec2.hpp"
 #include "ContextSettings.h"
 
 struct GLFWwindow;
@@ -14,8 +14,8 @@ namespace co
 	class Window
 	{
 	private:
-		Vec2u m_Position;
-		Vec2u m_Size;
+		glm::uvec2 m_Position;
+		glm::uvec2 m_Size;
 		std::string m_Title;
 		ContextSettings m_Context;
 
@@ -31,12 +31,12 @@ namespace co
 
 		GLFWwindow* GetRawWindow() const;
 
-		Vec2u GetPosition() const;
+		const glm::uvec2& GetPosition() const;
 		void SetPosX(unsigned int x);
 		void SetPosY(unsigned int y);
 		void SetPosition(unsigned int x, unsigned int y);
 
-		Vec2u GetSize() const;
+		const glm::uvec2& GetSize() const;
 		void SetWidth(unsigned int width);
 		void SetHeight(unsigned int height);
 		void SetSize(unsigned int width, unsigned int height);

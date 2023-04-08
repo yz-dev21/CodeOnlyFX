@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../System/Vector2.h"
+#include "../glm/vec2.hpp"
 #include <span>
 
 namespace co
@@ -11,7 +11,7 @@ namespace co
 	private:
 		unsigned int m_Texture;
 		std::vector<unsigned char> m_Image;
-		Vec2u m_Size;
+		glm::uvec2 m_Size;
 	public:
 		Texture();
 		Texture(unsigned int width, unsigned int height, std::span<unsigned char> rawImage);
@@ -21,7 +21,7 @@ namespace co
 		void GenerateMipmap() const;
 
 		const std::vector<unsigned char>& GetImage() const;
-		Vec2u GetSize() const;
+		const glm::uvec2& GetSize() const;
 
 		void Cleanup();
 	};

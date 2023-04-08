@@ -3,7 +3,7 @@
 
 namespace co
 {
-	Texture::Texture() : m_Texture(NULL)
+	Texture::Texture() : m_Texture(NULL), m_Size(0, 0)
 	{
 	}
 	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned char> rawImage) : m_Texture(NULL), m_Size(width, height)
@@ -37,7 +37,7 @@ namespace co
 	{
 		return m_Image;
 	}
-	Vec2u Texture::GetSize() const
+	const glm::uvec2& Texture::GetSize() const
 	{
 		return m_Size;
 	}

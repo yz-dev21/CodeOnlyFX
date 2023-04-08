@@ -1,5 +1,6 @@
 #include "Graphics/SpriteBatch.h"
-#include "Graphics/Matrix.h"
+#include "../glm/mat4x4.hpp"
+#include "../glm/ext/matrix_transform.hpp"
 #include <GL/glew.h>
 
 namespace co
@@ -35,27 +36,27 @@ namespace co
 		m_Shader = shader;
 		m_InPair = true;
 	}
-	void SpriteBatch::Draw(Texture* texture, const Vec2f& position, const Vec2f& size, const Color& color, float rotate)
+	void SpriteBatch::Draw(Texture* texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
 		if (!m_InPair)
 			return;
 
 		m_Shader->Bind();
-		Matrix model;
+		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
-		model.Translate(position);
+		model = glm::translate(model, glm::vec3(position, 0.0f));
 
 		// Rotate
 		if (rotate != 0.f)
 		{
-			model.Translate(Vec2f(0.5f * size.X, 0.5f * size.Y)); // Move to center of quad
-			model.Rotate(rotate);
-			model.Translate(Vec2f(-0.5f * size.X, -0.5f * size.Y)); // Move back to origin
+			model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));  // Move to center of quad
+			model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+			model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // Move back to origin
 		}
 
 		// Scale
-		model.Scale(size);
+		model = glm::scale(model, glm::vec3(size, 1.0f));
 
 		m_Shader->SetUniform("model", model);
 		m_Shader->SetUniform("spriteColor", color);

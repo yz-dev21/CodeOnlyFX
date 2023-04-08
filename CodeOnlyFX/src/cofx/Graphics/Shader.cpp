@@ -25,7 +25,7 @@ namespace co
 		if (!success)
 		{
 			glGetProgramInfoLog(m_Shader, 512, NULL, infoLog);
-			CO_CRITICAL("Femto::Graphics::Shader; Failed to link shader program : {}", infoLog);
+			CO_CRITICAL("cofx::Graphics::Shader; Failed to link shader program : {}", infoLog);
 			return;
 		}
 
@@ -54,11 +54,11 @@ namespace co
 	}
 	void Shader::SetUniform(std::string_view name, const Color& color) const
 	{
-		glUniform3f(glGetUniformLocation(m_Shader, name.data()), static_cast<float>(color.R), static_cast<float>(color.G), static_cast<float>(color.B));
+		glUniform3f(glGetUniformLocation(m_Shader, name.data()), static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f));
 	}
-	void Shader::SetUniform(std::string_view name, const Matrix& matrix) const
+	void Shader::SetUniform(std::string_view name, const glm::mat4& matrix) const
 	{
-		glUniformMatrix4fv(glGetUniformLocation(m_Shader, name.data()), 1, false, matrix.GetRawMatrix().data());
+		glUniformMatrix4fv(glGetUniformLocation(m_Shader, name.data()), 1, false, &matrix[0][0]);
 	}
 	void Shader::Cleanup()
 	{
@@ -84,7 +84,7 @@ namespace co
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 512, NULL, infoLog);
-				CO_CRITICAL("Femto::Graphics::Shader; Failed to compile vertex shader. {}", infoLog);
+				CO_CRITICAL("cofx::Graphics::Shader; Failed to compile vertex shader. {}", infoLog);
 				return NULL;
 			}
 		}
@@ -98,7 +98,7 @@ namespace co
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 512, NULL, infoLog);
-				CO_CRITICAL("Femto::Graphics::Shader; Failed to compile fragment shader. {}", infoLog);
+				CO_CRITICAL("cofx::Graphics::Shader; Failed to compile fragment shader. {}", infoLog);
 				return NULL;
 			}
 		}

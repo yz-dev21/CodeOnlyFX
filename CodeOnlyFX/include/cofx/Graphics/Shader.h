@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Color.h"
-#include "Matrix.h"
+#include "../glm/mat4x4.hpp"
 
 namespace co
 {
@@ -29,7 +29,7 @@ namespace co
 		void SetUniform(std::string_view name, int value) const;
 		void SetUniform(std::string_view name, float value) const;
 		void SetUniform(std::string_view name, const Color& color) const;
-		void SetUniform(std::string_view name, const Matrix& matrix) const;
+		void SetUniform(std::string_view name, const glm::mat4& matrix) const;
 
 		void Cleanup();
 	private:
