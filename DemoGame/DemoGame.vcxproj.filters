@@ -28,5 +28,8 @@
     <Image Include="Assets\Gunner_Black_Idle.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Assets\Gunner_Red_Idle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 
 namespace co
 {
-	SpriteBatch::SpriteBatch() : m_Shader(nullptr), m_QuadVAO(NULL), m_InPair(false)
+	SpriteBatch::SpriteBatch(Window* window) : m_Window(window), m_Shader(nullptr), m_QuadVAO(NULL), m_InPair(false)
 	{
 		unsigned int VBO;
 		float vertices[] = {
