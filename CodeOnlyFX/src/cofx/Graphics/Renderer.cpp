@@ -1,12 +1,20 @@
-#include "Graphics/SpriteBatch.h"
+#include "Graphics/Renderer.h"
 #include "../glm/mat4x4.hpp"
 #include "../glm/ext/matrix_transform.hpp"
 #include <GL/glew.h>
 
 namespace co
 {
-	SpriteBatch::SpriteBatch(Window* window) : m_Window(window), m_Shader(nullptr), m_QuadVAO(NULL), m_InPair(false)
+	Shader* Renderer::m_Shader;
+	unsigned int Renderer::m_QuadVAO;
+	bool Renderer::m_InPair;
+
+	void Renderer::Initialize()
 	{
+		m_Shader = nullptr;
+		m_QuadVAO = NULL;
+		m_InPair = false;
+
 		unsigned int VBO;
 		float vertices[] = {
 			// pos      // tex
@@ -31,17 +39,46 @@ namespace co
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
-	void SpriteBatch::Begin(Shader* shader)
+	void Renderer::Begin(Shader* shader)
 	{
 		m_Shader = shader;
 		m_InPair = true;
 	}
-	void SpriteBatch::Draw(Texture* texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
+	void Renderer::Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
 		if (!m_InPair)
 			return;
 
-		m_Shader->Bind();
+		m_Shader->Bind().SetUniform("useTex", false);
+		glm::mat4 model = glm::mat4(1.0f);
+
+		// Move
+		model = glm::translate(model, glm::vec3(position, 0.0f));
+
+		// Rotate
+		if (rotate != 0.f)
+		{
+			model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));  // Move to center of quad
+			model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+			model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // Move back to origin
+		}
+
+		// Scale
+		model = glm::scale(model, glm::vec3(size, 1.0f));
+
+		m_Shader->SetUniform("model", model);
+		m_Shader->SetUniform("spriteColor", color);
+
+		glBindVertexArray(m_QuadVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
+	}
+	void Renderer::Draw(Texture* texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
+	{
+		if (!m_InPair)
+			return;
+
+		m_Shader->Bind().SetUniform("useTex", true);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -68,7 +105,7 @@ namespace co
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 	}
-	void SpriteBatch::End()
+	void Renderer::End()
 	{
 		m_InPair = false;
 		m_Shader = nullptr;

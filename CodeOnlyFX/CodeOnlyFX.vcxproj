@@ -194,7 +194,8 @@
     <ClInclude Include="include\cofx\Core\Window.h" />
     <ClInclude Include="include\cofx\Graphics\Color.h" />
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
-    <ClInclude Include="include\cofx\Graphics\SpriteBatch.h" />
+    <ClInclude Include="include\cofx\Graphics\Renderer.h" />
+    <ClInclude Include="include\cofx\Graphics\SpriteSheet.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
     <ClInclude Include="include\cofx\System\App.h" />
     <ClInclude Include="include\cofx\System\Timer.h" />
@@ -627,7 +628,8 @@
     <ClCompile Include="src\cofx\Core\Debug.cpp" />
     <ClCompile Include="src\cofx\Core\Window.cpp" />
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
-    <ClCompile Include="src\cofx\Graphics\SpriteBatch.cpp" />
+    <ClCompile Include="src\cofx\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\cofx\Graphics\SpriteSheet.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
     <ClCompile Include="src\cofx\System\App.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />

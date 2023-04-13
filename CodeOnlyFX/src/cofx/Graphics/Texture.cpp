@@ -41,6 +41,10 @@ namespace co
 	{
 		return m_Size;
 	}
+	unsigned char& Texture::operator[](int index)
+	{
+		return m_Image[index];
+	}
 	void Texture::Cleanup()
 	{
 		if (m_Texture)

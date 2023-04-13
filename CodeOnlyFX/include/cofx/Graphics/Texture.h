@@ -23,6 +23,8 @@ namespace co
 		const std::vector<unsigned char>& GetImage() const;
 		const glm::uvec2& GetSize() const;
 
+		unsigned char& operator[](int index);
+
 		void Cleanup();
 	};
 }

@@ -27,7 +27,7 @@ static std::string GetText(std::string_view file)
 	}
 	catch (std::ifstream::failure e)
 	{
-		CO_ERROR("co::Core::Assets; Failed to read text: {}", e.what());
+		CO_ERROR("cofx::Core::Assets; Failed to read text: {}", e.what());
 		return nullptr;
 	}
 	return text;
