@@ -6,7 +6,7 @@ namespace co
 	Texture::Texture() : m_Texture(NULL), m_Size(0, 0)
 	{
 	}
-	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned char> rawImage) : m_Texture(NULL), m_Size(width, height)
+	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage) : m_Texture(NULL), m_Size(width, height)
 	{
 		m_Image.assign(rawImage.begin(), rawImage.end());
 
@@ -33,17 +33,13 @@ namespace co
 	{
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	const std::vector<unsigned char>& Texture::GetImage() const
+	const std::vector<unsigned int>& Texture::GetImage() const
 	{
 		return m_Image;
 	}
 	const glm::uvec2& Texture::GetSize() const
 	{
 		return m_Size;
-	}
-	unsigned char& Texture::operator[](int index)
-	{
-		return m_Image[index];
 	}
 	void Texture::Cleanup()
 	{

@@ -7,13 +7,8 @@
       "type": 1
     },
     {
-      "name": "soldier",
+      "name": "soldierSpriteSheet",
       "file": "../../DemoGame/Assets/Gunner_Black_Idle.png",
-      "type": 2
-    },
-    {
-      "name": "redSoldier",
-      "file": "../../DemoGame/Assets/Gunner_Red_Idle.png",
       "type": 2
     }
   ]
