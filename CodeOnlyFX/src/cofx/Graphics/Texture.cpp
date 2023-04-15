@@ -36,6 +36,17 @@ namespace co
 				m_Image.push_back(pixel);
 			}
 		}
+
+		glGenTextures(1, &m_Texture);
+		glBindTexture(GL_TEXTURE_2D, m_Texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Size.x, m_Size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image.data());
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	Texture::~Texture()
 	{
