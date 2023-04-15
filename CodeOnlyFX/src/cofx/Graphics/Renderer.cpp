@@ -107,7 +107,7 @@ namespace co
 	}
 	void Renderer::End()
 	{
-		m_InPair = false;
 		m_Shader = nullptr;
+		m_InPair = false;
 	}
 }

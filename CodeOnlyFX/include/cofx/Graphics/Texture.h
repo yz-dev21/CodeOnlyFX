@@ -15,6 +15,7 @@ namespace co
 	public:
 		Texture();
 		Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage);
+		Texture(Texture* spriteSheet, unsigned int spriteSize, unsigned int x, unsigned int y);
 		~Texture();
 
 		void Bind() const;

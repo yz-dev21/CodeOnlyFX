@@ -5,8 +5,8 @@
 class DemoGame : public co::App
 {
 private:
-	co::Shader* m_DefaultShader = nullptr;
-	co::Texture m_SoldierTex;
+	co::Shader* m_DefaultShader;
+	co::Texture* m_SoldierTex;
 protected:
 	//Femto::ContextSettings SetupContext() override
 	//{
@@ -25,8 +25,8 @@ protected:
 		glm::mat4 projection = glm::ortho<float>(0.f, m_Window->GetSize().x, m_Window->GetSize().y, 0.f, -1.f, 1.f);
 		m_DefaultShader->SetUniform("projection", projection);
 
-		auto spriteSheet = co::SpriteSheet(co::Assets::Get<co::Texture>("soldierSpriteSheet"));
-		spriteSheet.GetTexture(m_SoldierTex, 48, 0, 0);
+		m_SoldierTex = new co::Texture(co::Assets::Get<co::Texture>("soldierSpriteSheet"), 48, 0, 0);
+		m_SoldierTex->GenerateMipmap();
 
 		co::Renderer::Initialize();
 	}
@@ -39,7 +39,7 @@ protected:
 
 		co::Renderer::Begin(m_DefaultShader);
 
-		co::Renderer::Draw(&m_SoldierTex, { 200.f, 200.f }, { 48.f, 48.f }, co::Color::White, 0.f);
+		co::Renderer::Draw(m_SoldierTex, { 400.f - 24.f, 300.f - 24.f }, m_SoldierTex->GetSize(), co::Color::White, 0.f);
 		//co::Renderer::Draw({ 0.f, 0.f }, { 50.f, 50.f }, co::Color::Green, 0.f);
 
 		co::Renderer::End();

@@ -15,13 +15,13 @@ namespace co
 	{
 	private:
 		static bool m_Init;
-
-		static void Initialize();
 	public:
 		Debug() = delete;
 		~Debug() = delete;
 
 		static bool Active;
+
+		static void Initialize();
 		static void Critical(std::string_view str, const std::source_location& location = std::source_location::current());
 		static void Error(std::string_view str, const std::source_location& location = std::source_location::current());
 		static void Warn(std::string_view str, const std::source_location& location = std::source_location::current());

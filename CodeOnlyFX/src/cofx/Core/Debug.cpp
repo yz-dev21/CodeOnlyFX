@@ -5,8 +5,8 @@
 
 namespace co
 {
-	bool Debug::m_Init = false;
-	bool Debug::Active = true;
+	bool Debug::m_Init;
+	bool Debug::Active;
 
 	void Debug::Initialize()
 	{
@@ -35,7 +35,6 @@ namespace co
 	{
 		if (!Active) return;
 
-		Initialize();
 		std::cout << std::format("[\x1b[41mCRITICAL\x1b[0m] {}\nAt {}({}:{}) `{}`\n",
 			str,
 			location.file_name(),
@@ -48,7 +47,6 @@ namespace co
 	{
 		if (!Active) return;
 
-		Initialize();
 		std::cout << std::format("[\x1b[91mERROR\x1b[0m] {}\nAt {}({}:{}) `{}`\n",
 			str,
 			location.file_name(),
@@ -61,7 +59,6 @@ namespace co
 	{
 		if (!Active) return;
 
-		Initialize();
 		std::cout << std::format("[\x1b[33mWARN\x1b[0m] {}\nAt {}({}:{}) `{}`\n",
 			str,
 			location.file_name(),
@@ -74,7 +71,6 @@ namespace co
 	{
 		if (!Active) return;
 
-		Initialize();
 		std::cout << std::format("[\x1b[94mINFO\x1b[0m] {}\nAt {}({}:{}) `{}`\n",
 			str,
 			location.file_name(),

@@ -21,6 +21,22 @@ namespace co
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	Texture::Texture(Texture* spriteSheet, unsigned int spriteSize, unsigned int x, unsigned int y)
+	{
+		m_Size = { spriteSize, spriteSize };
+
+		const int xp = x * spriteSize, yp = y * spriteSize;
+
+		for (auto ty = 0; ty < spriteSize; ty++)
+		{
+			for (auto tx = 0; tx < spriteSize; tx++)
+			{
+				auto i = (xp + tx) + (yp + ty) * spriteSheet->GetSize().x;
+				unsigned int pixel = spriteSheet->GetImage()[i];
+				m_Image.push_back(pixel);
+			}
+		}
+	}
 	Texture::~Texture()
 	{
 		Cleanup();

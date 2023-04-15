@@ -9,6 +9,9 @@ namespace co
 		m_ContextSettings = SetupContext();
 
 		Debug::Active = m_ContextSettings.Debug;
+		if (m_ContextSettings.Debug)
+			Debug::Initialize();
+
 		m_Window = std::make_unique<Window>(m_ContextSettings);
 
 		Initialize();

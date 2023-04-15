@@ -6,8 +6,6 @@ namespace co
 	template<typename T>
 	T* Assets::Get(std::string_view name)
 	{
-		if (!Exists<T>(name)) return nullptr;
-
 		return m_Assets<T>[std::string(name)].get();
 	}
 	template <typename T>
