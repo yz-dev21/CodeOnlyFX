@@ -1,12 +1,6 @@
 {
   "assets": [
     {
-      "name": "default",
-      "vertex": "../../DemoGame/Assets/Shaders/default.vert",
-      "fragment": "../../DemoGame/Assets/Shaders/default.frag",
-      "type": 1
-    },
-    {
       "name": "flappyBird",
       "file": "../../DemoGame/Assets/Player/bird1.png",
       "type": 2

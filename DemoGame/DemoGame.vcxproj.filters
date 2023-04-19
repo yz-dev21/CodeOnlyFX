@@ -20,8 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\default.vert" />
-    <None Include="Assets\Shaders\default.frag" />
     <None Include="Assets\assets.json" />
   </ItemGroup>
 </Project>
