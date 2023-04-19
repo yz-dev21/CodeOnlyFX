@@ -7,8 +7,8 @@
       "type": 1
     },
     {
-      "name": "soldierSpriteSheet",
-      "file": "../../DemoGame/Assets/Gunner_Black_Idle.png",
+      "name": "flappyBird",
+      "file": "../../DemoGame/Assets/Player/bird1.png",
       "type": 2
     }
   ]

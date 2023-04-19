@@ -11,6 +11,7 @@ namespace co
 		static Shader* m_Shader;
 		static unsigned int m_QuadVAO;
 		static bool m_InPair;
+		static bool m_Init;
 	public:
 		static void Initialize();
 		static void Begin(Shader* shader);

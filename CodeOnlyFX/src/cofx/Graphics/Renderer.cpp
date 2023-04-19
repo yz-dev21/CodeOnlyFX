@@ -8,12 +8,16 @@ namespace co
 	Shader* Renderer::m_Shader;
 	unsigned int Renderer::m_QuadVAO;
 	bool Renderer::m_InPair;
+	bool Renderer::m_Init;
 
 	void Renderer::Initialize()
 	{
+		if (m_Init) return;
+
 		m_Shader = nullptr;
 		m_QuadVAO = NULL;
 		m_InPair = false;
+		m_Init = false;
 
 		unsigned int VBO;
 		float vertices[] = {
@@ -38,9 +42,13 @@ namespace co
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
+
+		m_Init = true;
 	}
 	void Renderer::Begin(Shader* shader)
 	{
+		if (!m_Init) Initialize();
+
 		m_Shader = shader;
 		m_InPair = true;
 	}

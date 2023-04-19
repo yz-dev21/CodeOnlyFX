@@ -143,9 +143,6 @@
     <None Include="Assets\Shaders\default.vert" />
     <None Include="Assets\Shaders\default.frag" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Gunner_Black_Idle.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

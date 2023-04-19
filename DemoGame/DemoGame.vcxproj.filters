@@ -24,9 +24,4 @@
     <None Include="Assets\Shaders\default.frag" />
     <None Include="Assets\assets.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Gunner_Black_Idle.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

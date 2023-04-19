@@ -10,26 +10,15 @@ namespace co
 	{
 		m_Image.assign(rawImage.begin(), rawImage.end());
 
-		glGenTextures(1, &m_Texture);
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, rawImage.data());
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		glBindTexture(GL_TEXTURE_2D, 0);
+		GenerateTexture();
 	}
-	Texture::Texture(Texture* spriteSheet, unsigned int spriteSize, unsigned int x, unsigned int y)
+	Texture::Texture(Texture* spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position) : m_Size(spriteSize)
 	{
-		m_Size = { spriteSize, spriteSize };
+		const int xp = position.x * spriteSize.x, yp = position.y * spriteSize.y;
 
-		const int xp = x * spriteSize, yp = y * spriteSize;
-
-		for (auto ty = 0; ty < spriteSize; ty++)
+		for (auto ty = 0; ty < spriteSize.y; ty++)
 		{
-			for (auto tx = 0; tx < spriteSize; tx++)
+			for (auto tx = 0; tx < spriteSize.x; tx++)
 			{
 				auto i = (xp + tx) + (yp + ty) * spriteSheet->GetSize().x;
 				unsigned int pixel = spriteSheet->GetImage()[i];
@@ -37,16 +26,7 @@ namespace co
 			}
 		}
 
-		glGenTextures(1, &m_Texture);
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Size.x, m_Size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image.data());
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		glBindTexture(GL_TEXTURE_2D, 0);
+		GenerateTexture();
 	}
 	Texture::~Texture()
 	{
@@ -72,5 +52,18 @@ namespace co
 	{
 		if (m_Texture)
 			glDeleteTextures(1, &m_Texture);
+	}
+	void Texture::GenerateTexture()
+	{
+		glGenTextures(1, &m_Texture);
+		glBindTexture(GL_TEXTURE_2D, m_Texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Size.x, m_Size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image.data());
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

@@ -6,7 +6,8 @@ class DemoGame : public co::App
 {
 private:
 	co::Shader* m_DefaultShader = nullptr;
-	co::Texture* m_SoldierTex = nullptr;
+	co::Texture* m_SpriteSheet = nullptr;
+	co::Texture* m_FlappyBird = nullptr;
 protected:
 	//Femto::ContextSettings SetupContext() override
 	//{
@@ -17,6 +18,8 @@ protected:
 	//}
 	void Initialize() override
 	{
+		m_Window->SetTitle("FlappyBird");
+
 		co::Assets::Load("../../DemoGame/Assets/assets.json");
 
 		m_DefaultShader = co::Assets::Get<co::Shader>("default");
@@ -25,10 +28,11 @@ protected:
 		glm::mat4 projection = glm::ortho<float>(0.f, m_Window->GetSize().x, m_Window->GetSize().y, 0.f, -1.f, 1.f);
 		m_DefaultShader->SetUniform("projection", projection);
 
-		m_SoldierTex = new co::Texture(co::Assets::Get<co::Texture>("soldierSpriteSheet"), 48, 0, 0);
-		m_SoldierTex->GenerateMipmap();
+		m_SpriteSheet = co::Assets::Get<co::Texture>("flappyBird");
+		m_FlappyBird = new co::Texture(m_SpriteSheet, { 16, 16 }, { 1, 0 });
+		m_FlappyBird->GenerateMipmap();
 
-		co::Renderer::Initialize();
+		//co::Renderer::Initialize();
 	}
 	void Update(float dt) override
 	{
@@ -39,8 +43,7 @@ protected:
 
 		co::Renderer::Begin(m_DefaultShader);
 
-		co::Renderer::Draw(m_SoldierTex, { 400.f - 24.f, 300.f - 24.f }, m_SoldierTex->GetSize(), co::Color::White, 0.f);
-		co::Renderer::Draw({ 0.f, 0.f }, { 50.f, 50.f }, co::Color::Green, 0.f);
+		co::Renderer::Draw(m_FlappyBird, { 200.f, 200.f }, { 96.f, 96.f }, co::Color::White, 0.f);
 
 		co::Renderer::End();
 	}
