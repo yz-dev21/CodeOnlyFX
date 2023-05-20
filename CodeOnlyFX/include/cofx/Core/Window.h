@@ -4,7 +4,6 @@
 #include <utility>
 #include "../Graphics/Color.h"
 #include "../glm/vec2.hpp"
-#include "ContextSettings.h"
 
 struct GLFWwindow;
 struct GLFWmonitor;
@@ -17,7 +16,6 @@ namespace co
 		glm::uvec2 m_Position;
 		glm::uvec2 m_Size;
 		std::string m_Title;
-		ContextSettings m_Context;
 
 		bool m_FullScreen;
 		bool m_Resizable;
@@ -26,7 +24,7 @@ namespace co
 		GLFWmonitor* m_Monitor;
 	public:
 		Window();
-		Window(const ContextSettings& contextSettings);
+		Window(unsigned int width, unsigned int height, std::string_view title);
 		~Window();
 
 		GLFWwindow* GetRawWindow() const;
@@ -47,9 +45,10 @@ namespace co
 		void SetFullScreen(bool fullScreen);
 		void SetResizable(bool resizable);
 
+		void SetFrameRate(unsigned int frameRate);
+
 		void Clear(const Color& color);
 		std::string_view GetHardWareInfo() const;
-		void GetGLVersion(unsigned int& major, unsigned int& minor) const;
 
 		void Close();
 		bool IsRunning() const;

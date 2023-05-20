@@ -6,7 +6,7 @@
 namespace co
 {
 	bool Debug::m_Init;
-	bool Debug::Active;
+	bool Debug::Active = false;
 
 	void Debug::Initialize()
 	{

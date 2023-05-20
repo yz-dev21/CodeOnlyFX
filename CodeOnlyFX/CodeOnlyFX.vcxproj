@@ -189,7 +189,6 @@
     <ClInclude Include="external\include\stb_image.h" />
     <ClInclude Include="include\cofx\cofx.hpp" />
     <ClInclude Include="include\cofx\Core\Assets.h" />
-    <ClInclude Include="include\cofx\Core\ContextSettings.h" />
     <ClInclude Include="include\cofx\Core\Debug.h" />
     <ClInclude Include="include\cofx\Core\Window.h" />
     <ClInclude Include="include\cofx\Graphics\Animation.h" />
@@ -197,7 +196,6 @@
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\Renderer.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
-    <ClInclude Include="include\cofx\System\App.h" />
     <ClInclude Include="include\cofx\System\Timer.h" />
     <ClInclude Include="include\glm\common.hpp" />
     <ClInclude Include="include\glm\detail\compute_common.hpp" />
@@ -631,7 +629,6 @@
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
     <ClCompile Include="src\cofx\Graphics\Renderer.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
-    <ClCompile Include="src\cofx\System\App.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>

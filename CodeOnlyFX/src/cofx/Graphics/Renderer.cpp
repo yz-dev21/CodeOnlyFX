@@ -6,20 +6,8 @@
 
 namespace co
 {
-	Shader* Renderer::m_Shader;
-	unsigned int Renderer::m_QuadVAO;
-	bool Renderer::m_InPair;
-	bool Renderer::m_Init;
-
-	void Renderer::Initialize(const Window& window)
+	Renderer::Renderer(const Window& window) : m_QuadVAO(NULL)
 	{
-		if (m_Init) return;
-
-		m_Shader = nullptr;
-		m_QuadVAO = NULL;
-		m_InPair = false;
-		m_Init = false;
-
 		const std::string vertexCode = R"(
 #version 330 core
 layout (location = 0) in vec4 vertex; // <vec2 position, vec2 texCoords>
@@ -56,14 +44,13 @@ void main()
         color = vec4(spriteColor, 1.0);
 }  
 )";
-		m_Shader = new Shader();
-		m_Shader->Attach(vertexCode, ShaderType::Vertex);
-		m_Shader->Attach(fragmentCode, ShaderType::Fragment);
+		m_Shader.Attach(vertexCode, ShaderType::Vertex);
+		m_Shader.Attach(fragmentCode, ShaderType::Fragment);
 
-		m_Shader->Bind().SetUniform("image", 0);
+		m_Shader.Bind().SetUniform("image", 0);
 
 		glm::mat4 projection = glm::ortho<float>(0.f, window.GetSize().x, window.GetSize().y, 0.f, -1.f, 1.f);
-		m_Shader->SetUniform("projection", projection);
+		m_Shader.SetUniform("projection", projection);
 
 		unsigned int VBO;
 		float vertices[] = {
@@ -88,54 +75,10 @@ void main()
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
-
-		m_Init = true;
-	}
-	void Renderer::Initialize(Shader* shader)
-	{
-		if (m_Init) return;
-
-		m_Shader = shader;
-		m_QuadVAO = NULL;
-		m_InPair = false;
-		m_Init = false;
-
-		unsigned int VBO;
-		float vertices[] = {
-			// pos      // tex
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 0.0f,
-
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f
-		};
-
-		glGenVertexArrays(1, &m_QuadVAO);
-		glGenBuffers(1, &VBO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		glBindVertexArray(m_QuadVAO);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-
-		m_Init = true;
-	}
-	void Renderer::Begin()
-	{
-		m_InPair = true;
 	}
 	void Renderer::Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
-		if (!m_InPair)
-			return;
-
-		m_Shader->Bind().SetUniform("useTex", false);
+		m_Shader.Bind().SetUniform("useTex", false);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -152,19 +95,16 @@ void main()
 		// Scale
 		model = glm::scale(model, glm::vec3(size, 1.0f));
 
-		m_Shader->SetUniform("model", model);
-		m_Shader->SetUniform("spriteColor", color);
+		m_Shader.SetUniform("model", model);
+		m_Shader.SetUniform("spriteColor", color);
 
 		glBindVertexArray(m_QuadVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 	}
-	void Renderer::Draw(Texture* texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
+	void Renderer::Draw(Texture& texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
-		if (!m_InPair)
-			return;
-
-		m_Shader->Bind().SetUniform("useTex", true);
+		m_Shader.Bind().SetUniform("useTex", true);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -181,18 +121,14 @@ void main()
 		// Scale
 		model = glm::scale(model, glm::vec3(size, 1.0f));
 
-		m_Shader->SetUniform("model", model);
-		m_Shader->SetUniform("spriteColor", color);
+		m_Shader.SetUniform("model", model);
+		m_Shader.SetUniform("spriteColor", color);
 
 		glActiveTexture(GL_TEXTURE0);
-		texture->Bind();
+		texture.Bind();
 
 		glBindVertexArray(m_QuadVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
-	}
-	void Renderer::End()
-	{
-		m_InPair = false;
 	}
 }

@@ -9,25 +9,24 @@ extern "C"
 	__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 
-
 namespace co
 {
 	Window::Window()
 		: m_Position(0, 0), m_Size(0, 0), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
 	{
 	}
-	Window::Window(const ContextSettings& contextSettings)
-		: m_Position(50, 50), m_Size(800, 600), m_Title("COFX App"), m_Context(contextSettings), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
+	Window::Window(unsigned int width, unsigned int height, std::string_view title)
+		: m_Position(50, 50), m_Size(width, height), m_Title(title), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
 	{
 		if (!glfwInit())
 		{
 			Debug::Critical("cofx::Core::Window; Failed to initialize GLFW.");
 			return;
 		}
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_Context.OpenGLMajorVersion);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_Context.OpenGLMinorVersion);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, m_Context.Debug);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, Debug::Active);
 
 		m_Monitor = glfwGetPrimaryMonitor();
 
@@ -151,6 +150,11 @@ namespace co
 		m_Resizable = resizable;
 		glfwSetWindowAttrib(m_Window, GLFW_RESIZABLE, m_Resizable);
 	}
+	void Window::SetFrameRate(unsigned int frameRate)
+	{
+		auto videoMode = glfwGetVideoMode(m_Monitor);
+		glfwSwapInterval(static_cast<int>(videoMode->refreshRate / frameRate));
+	}
 	void Window::Clear(const Color& color)
 	{
 		glClearColor(static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f), static_cast<float>(color.A / 255.f));
@@ -160,11 +164,6 @@ namespace co
 	{
 		auto renderer = (const char*)glGetString(GL_RENDERER);
 		return renderer;
-	}
-	void Window::GetGLVersion(unsigned int& major, unsigned int& minor) const
-	{
-		major = m_Context.OpenGLMajorVersion;
-		minor = m_Context.OpenGLMinorVersion;
 	}
 	void Window::Close()
 	{

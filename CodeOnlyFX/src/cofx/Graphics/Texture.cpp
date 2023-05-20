@@ -1,4 +1,5 @@
 #include "Graphics/Texture.h"
+#include "Core/Debug.h"
 #include <GL/glew.h>
 
 namespace co
@@ -6,13 +7,13 @@ namespace co
 	Texture::Texture() : m_Texture(NULL), m_Size(0, 0)
 	{
 	}
-	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage) : m_Texture(NULL), m_Size(width, height)
+	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage) : m_Size(width, height)
 	{
 		m_Image.assign(rawImage.begin(), rawImage.end());
 
 		GenerateTexture();
 	}
-	Texture::Texture(Texture* spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position) : m_Size(spriteSize)
+	Texture::Texture(const Texture& spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position) : m_Size(spriteSize)
 	{
 		const int xp = position.x * spriteSize.x, yp = position.y * spriteSize.y;
 
@@ -20,12 +21,11 @@ namespace co
 		{
 			for (auto tx = 0; tx < spriteSize.x; tx++)
 			{
-				auto i = (xp + tx) + (yp + ty) * spriteSheet->GetSize().x;
-				unsigned int pixel = spriteSheet->GetImage()[i];
+				auto i = (xp + tx) + (yp + ty) * spriteSheet.GetSize().x;
+				unsigned int pixel = spriteSheet.GetImage()[i];
 				m_Image.push_back(pixel);
 			}
 		}
-
 		GenerateTexture();
 	}
 	Texture::~Texture()

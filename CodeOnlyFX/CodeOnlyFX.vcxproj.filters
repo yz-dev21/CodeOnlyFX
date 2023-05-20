@@ -18,9 +18,6 @@
     <ClInclude Include="include\cofx\Core\Assets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\cofx\Core\ContextSettings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\cofx\Core\Debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -37,9 +34,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cofx\System\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\System\Timer.h">
@@ -1454,9 +1448,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cofx\Core\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cofx\System\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cofx\System\Timer.cpp">

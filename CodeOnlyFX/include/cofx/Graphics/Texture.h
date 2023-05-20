@@ -15,7 +15,8 @@ namespace co
 	public:
 		Texture();
 		Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage);
-		Texture(Texture* spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position);
+		Texture(const Texture& spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position);
+
 		~Texture();
 
 		void Bind() const;
