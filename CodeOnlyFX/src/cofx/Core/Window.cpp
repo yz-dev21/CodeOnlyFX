@@ -57,6 +57,7 @@ namespace co
 	{
 		Cleanup();
 	}
+	// Might be deleted in next update.
 	GLFWwindow* Window::GetRawWindow() const
 	{
 		return m_Window;
@@ -105,6 +106,7 @@ namespace co
 		m_Size.y = height;
 		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
+	// Too unefficient. Try using one `if`.
 	void Window::SetSize(unsigned int width, unsigned int height)
 	{
 		if (m_Size.x != width)
@@ -150,6 +152,8 @@ namespace co
 		m_Resizable = resizable;
 		glfwSetWindowAttrib(m_Window, GLFW_RESIZABLE, m_Resizable);
 	}
+	// Try using sleeps instead of `glfwSwapInterval`.
+	// Use `glfwSwapInterval` when VSYNC is needed.
 	void Window::SetFrameRate(unsigned int frameRate)
 	{
 		auto videoMode = glfwGetVideoMode(m_Monitor);
