@@ -57,11 +57,6 @@ namespace co
 	{
 		Cleanup();
 	}
-	// Might be deleted in next update.
-	GLFWwindow* Window::GetRawWindow() const
-	{
-		return m_Window;
-	}
 	const glm::uvec2& Window::GetPosition() const
 	{
 		return m_Position;
@@ -106,17 +101,12 @@ namespace co
 		m_Size.y = height;
 		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
-	// Too unefficient. Try using one `if`.
 	void Window::SetSize(unsigned int width, unsigned int height)
 	{
-		if (m_Size.x != width)
-			m_Size.x = width;
+		if (m_Size.x == width && m_Size.y == height) return;
 
-		if (m_Size.y != height)
-			m_Size.y = height;
-
-		if (m_Size.x != width || m_Size.y != height)
-			glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
+		m_Size = { width, height };
+		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
 	const std::string& Window::GetTitle() const
 	{
@@ -152,12 +142,13 @@ namespace co
 		m_Resizable = resizable;
 		glfwSetWindowAttrib(m_Window, GLFW_RESIZABLE, m_Resizable);
 	}
-	// Try using sleeps instead of `glfwSwapInterval`.
-	// Use `glfwSwapInterval` when VSYNC is needed.
+	void Window::SetVsync(bool vsync)
+	{
+		glfwSwapInterval(static_cast<int>(vsync));
+	}
 	void Window::SetFrameRate(unsigned int frameRate)
 	{
-		auto videoMode = glfwGetVideoMode(m_Monitor);
-		glfwSwapInterval(static_cast<int>(videoMode->refreshRate / frameRate));
+		// Spin loop or Sleep
 	}
 	void Window::Clear(const Color& color)
 	{

@@ -27,8 +27,6 @@ namespace co
 		Window(unsigned int width, unsigned int height, std::string_view title);
 		~Window();
 
-		GLFWwindow* GetRawWindow() const;
-
 		const glm::uvec2& GetPosition() const;
 		void SetPosX(unsigned int x);
 		void SetPosY(unsigned int y);
@@ -45,6 +43,7 @@ namespace co
 		void SetFullScreen(bool fullScreen);
 		void SetResizable(bool resizable);
 
+		void SetVsync(bool vsync);
 		void SetFrameRate(unsigned int frameRate);
 
 		void Clear(const Color& color);

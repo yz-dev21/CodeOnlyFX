@@ -14,20 +14,23 @@ int main()
 	auto flappyBirdSheet = co::Assets::Get<co::Texture>("flappyBird");
 
 	// Get first sprite of the spritesheet.
-	auto flappyBird = co::Texture(*flappyBirdSheet, glm::vec2{ 16, 16 }, glm::vec2{ 0, 0 });
+	auto flappyBird = co::Texture(*flappyBirdSheet, { 16, 16 }, { 0, 0 });
 	flappyBird.GenerateMipmap();
 
 	auto renderer = co::Renderer(window);
 
 	// For deltatime.
 	co::Timer timer;
+	// Game loop
 	while (window.IsRunning())
 	{
 		timer.Tick();
+		// Clear graphics and fills screen with given color.
 		window.Clear(co::Color{ 79, 98, 128 });
 
 		renderer.Draw(flappyBird, { 200.f, 200.f }, { 96.f, 96.f }, co::Color::White, 0.f);
 
+		// Get events & swap buffers
 		window.Update();
 		timer.Reset();
 	}
