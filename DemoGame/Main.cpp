@@ -5,16 +5,16 @@
 int main()
 {
 	auto window = co::Window(800, 600, "FlappyBird");
-	// Set target frame rate
-	window.SetFrameRate(60);
+	// Set window vsync
+	window.SetVsync(true);
 
 	// Load assets from json data.
 	co::Assets::Load("../../DemoGame/Assets/assets.json");
 	// Get flappy bird spritesheet.
-	auto flappyBirdSheet = co::Assets::Get<co::Texture>("flappyBird");
+	auto& flappyBirdSheet = co::Assets::Get<co::Texture>("flappyBird");
 
 	// Get first sprite of the spritesheet.
-	auto flappyBird = co::Texture(*flappyBirdSheet, { 16, 16 }, { 0, 0 });
+	auto flappyBird = co::Texture(flappyBirdSheet, { 16, 16 }, { 0, 0 });
 	flappyBird.GenerateMipmap();
 
 	auto renderer = co::Renderer(window);
@@ -25,13 +25,15 @@ int main()
 	while (window.IsRunning())
 	{
 		timer.Tick();
+
 		// Clear graphics and fills screen with given color.
-		window.Clear(co::Color{ 79, 98, 128 });
+		window.Clear({ 79, 98, 128 });
 
 		renderer.Draw(flappyBird, { 200.f, 200.f }, { 96.f, 96.f }, co::Color::White, 0.f);
 
 		// Get events & swap buffers
 		window.Update();
+
 		timer.Reset();
 	}
 }
@@ -39,5 +41,4 @@ int main()
 /*
 TODO
 - Change design more library-like.
-- Implement math library for glm.
 */

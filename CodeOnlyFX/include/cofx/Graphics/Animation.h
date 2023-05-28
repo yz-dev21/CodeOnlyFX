@@ -4,6 +4,6 @@ namespace co
 {
 	class Animation
 	{
-
+	public:
 	};
 }

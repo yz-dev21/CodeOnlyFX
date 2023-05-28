@@ -146,10 +146,6 @@ namespace co
 	{
 		glfwSwapInterval(static_cast<int>(vsync));
 	}
-	void Window::SetFrameRate(unsigned int frameRate)
-	{
-		// Spin loop or Sleep
-	}
 	void Window::Clear(const Color& color)
 	{
 		glClearColor(static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f), static_cast<float>(color.A / 255.f));

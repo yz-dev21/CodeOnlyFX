@@ -4,9 +4,9 @@ namespace co
 	std::map<std::string, std::unique_ptr<T>> Assets::m_Assets;
 
 	template<typename T>
-	T* Assets::Get(std::string_view name)
+	T& Assets::Get(std::string_view name)
 	{
-		return m_Assets<T>[std::string(name)].get();
+		return *m_Assets<T>[std::string(name)];
 	}
 	template <typename T>
 	bool Assets::Exists(std::string_view name)

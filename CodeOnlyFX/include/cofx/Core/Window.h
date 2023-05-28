@@ -44,7 +44,6 @@ namespace co
 		void SetResizable(bool resizable);
 
 		void SetVsync(bool vsync);
-		void SetFrameRate(unsigned int frameRate);
 
 		void Clear(const Color& color);
 		std::string_view GetHardWareInfo() const;

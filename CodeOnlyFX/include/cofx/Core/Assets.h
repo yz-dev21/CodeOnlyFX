@@ -14,7 +14,7 @@ namespace co
 	public:
 		static void Load(std::string_view assetsPath);
 		template <typename T>
-		static T* Get(std::string_view name);
+		static T& Get(std::string_view name);
 		template <typename T>
 		static bool Exists(std::string_view name);
 		template <typename T>
