@@ -12,10 +12,10 @@ int main()
 	co::Assets::Load("../../DemoGame/Assets/assets.json");
 	// Get flappy bird spritesheet.
 	auto& flappyBirdSheet = co::Assets::Get<co::Texture>("flappyBird");
+	flappyBirdSheet.GenerateMipmap();
 
 	// Get first sprite of the spritesheet.
 	auto flappyBird = co::Texture(flappyBirdSheet, { 16, 16 }, { 0, 0 });
-	flappyBird.GenerateMipmap();
 
 	auto renderer = co::Renderer(window);
 

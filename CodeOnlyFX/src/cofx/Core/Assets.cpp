@@ -59,6 +59,16 @@ namespace co
 			{
 			case 1:
 			{
+				int width, height;
+				std::vector<unsigned int> image;
+
+				GetImage(object["file"].GetString(), width, height, image);
+
+				m_Assets<Texture>[object["name"].GetString()] = std::make_unique<Texture>(width, height, image);
+				break;
+			}
+			case 2:
+			{
 				m_Assets<Shader>[object["name"].GetString()] = std::make_unique<Shader>();
 				auto& shader = *m_Assets<Shader>[object["name"].GetString()];
 
@@ -79,16 +89,6 @@ namespace co
 					shaderCode = GetText(object["geometry"].GetString());
 					shader.Attach(shaderCode, ShaderType::Geometry);
 				}
-				break;
-			}
-			case 2:
-			{
-				int width, height;
-				std::vector<unsigned int> image;
-
-				GetImage(object["file"].GetString(), width, height, image);
-
-				m_Assets<Texture>[object["name"].GetString()] = std::make_unique<Texture>(width, height, image);
 				break;
 			}
 			}

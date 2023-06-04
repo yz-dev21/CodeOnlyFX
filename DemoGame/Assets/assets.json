@@ -3,7 +3,7 @@
     {
       "name": "flappyBird",
       "file": "../../DemoGame/Assets/Player/bird1.png",
-      "type": 2
+      "type": 1
     }
   ]
 }
