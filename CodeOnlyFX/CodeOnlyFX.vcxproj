@@ -191,11 +191,9 @@
     <ClInclude Include="include\cofx\Core\Assets.h" />
     <ClInclude Include="include\cofx\Core\Debug.h" />
     <ClInclude Include="include\cofx\Core\Window.h" />
-    <ClInclude Include="include\cofx\Graphics\Animation.h" />
     <ClInclude Include="include\cofx\Graphics\Color.h" />
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\Renderer.h" />
-    <ClInclude Include="include\cofx\Graphics\Text.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
     <ClInclude Include="include\cofx\System\Timer.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -626,10 +624,8 @@
     <ClCompile Include="src\cofx\Core\Assets.cpp" />
     <ClCompile Include="src\cofx\Core\Debug.cpp" />
     <ClCompile Include="src\cofx\Core\Window.cpp" />
-    <ClCompile Include="src\cofx\Graphics\Animation.cpp" />
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
     <ClCompile Include="src\cofx\Graphics\Renderer.cpp" />
-    <ClCompile Include="src\cofx\Graphics\Text.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />
   </ItemGroup>

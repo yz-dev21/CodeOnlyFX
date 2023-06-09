@@ -4,14 +4,14 @@ namespace co
 {
 	struct Color
 	{
-		unsigned int R{};
-		unsigned int G{};
-		unsigned int B{};
-		unsigned int A{ 255 };
+		uint32_t R{};
+		uint32_t G{};
+		uint32_t B{};
+		uint32_t A{ 255 };
 
-		inline Color(unsigned int r, unsigned int b, unsigned int g, unsigned int a = 255);
+		inline Color(uint32_t r, uint32_t b, uint32_t g, uint32_t a = 255);
 
-		inline unsigned int ToInt() const;
+		inline uint32_t ToInt() const;
 
 		static const Color Black;
 		static const Color White;

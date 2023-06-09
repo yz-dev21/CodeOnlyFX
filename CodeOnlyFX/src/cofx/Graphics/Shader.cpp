@@ -13,7 +13,7 @@ namespace co
 	}
 	void Shader::Attach(std::string_view shaderCode, ShaderType type)
 	{
-		unsigned int shader = CompileShader(shaderCode, type);
+		uint32_t shader = CompileShader(shaderCode, type);
 		int success = 0;
 		char infoLog[512]{};
 
@@ -31,7 +31,7 @@ namespace co
 
 		glDeleteShader(shader);
 	}
-	unsigned int Shader::GetRawShader() const
+	uint32_t Shader::GetRawShader() const
 	{
 		return m_Shader;
 	}
@@ -65,14 +65,14 @@ namespace co
 		if (m_Shader)
 			glDeleteProgram(m_Shader);
 	}
-	unsigned int Shader::CompileShader(std::string_view shaderCode, ShaderType type)
+	uint32_t Shader::CompileShader(std::string_view shaderCode, ShaderType type)
 	{
 		auto cShaderCode = shaderCode.data();
 
 		int success = 0;
 		char infoLog[512]{};
 
-		unsigned int shader = NULL;
+		uint32_t shader = NULL;
 
 		if (type == ShaderType::Vertex)
 		{

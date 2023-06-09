@@ -1020,12 +1020,6 @@
     <ClInclude Include="include\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\cofx\Graphics\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\cofx\Graphics\Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cofx\Core\Assets.inl">
@@ -1466,12 +1460,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\glm\detail\glm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cofx\Graphics\Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cofx\Graphics\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

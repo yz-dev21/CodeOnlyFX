@@ -6,11 +6,11 @@
 
 namespace co
 {
-	Renderer::Renderer(const Window& window) : m_QuadVAO(NULL)
+	Renderer::Renderer(const glm::uvec2& windowSize) : m_QuadVAO(NULL)
 	{
 		const std::string vertexCode = R"(
 #version 330 core
-layout (location = 0) in vec4 vertex; // <vec2 position, vec2 texCoords>
+layout (location = 0) in vec4 vertex;
 
 out vec2 TexCoords;
 
@@ -49,7 +49,7 @@ void main()
 
 		m_Shader.Bind().SetUniform("image", 0);
 
-		glm::mat4 projection = glm::ortho<float>(0.f, window.GetSize().x, window.GetSize().y, 0.f, -1.f, 1.f);
+		glm::mat4 projection = glm::ortho<float>(0.f, windowSize.x, windowSize.y, 0.f, -1.f, 1.f);
 		m_Shader.SetUniform("projection", projection);
 
 		unsigned int VBO;

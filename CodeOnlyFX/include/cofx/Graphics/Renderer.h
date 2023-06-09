@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 #include "Texture.h"
-#include "../Core/Window.h"
+#include "../glm/vec2.hpp"
 
 namespace co
 {
@@ -10,10 +10,9 @@ namespace co
 	{
 	private:
 		Shader m_Shader;
-		unsigned int m_QuadVAO;
+		uint32_t m_QuadVAO;
 	public:
-		// Create renderer using default shader.
-		Renderer(const Window& window);
+		Renderer(const glm::uvec2& windowSize);
 
 		void Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
 		void Draw(Texture& texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);

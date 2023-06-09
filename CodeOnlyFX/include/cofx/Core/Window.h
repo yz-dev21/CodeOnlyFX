@@ -24,18 +24,18 @@ namespace co
 		GLFWmonitor* m_Monitor;
 	public:
 		Window();
-		Window(unsigned int width, unsigned int height, std::string_view title);
+		Window(uint32_t width, uint32_t height, std::string_view title);
 		~Window();
 
 		const glm::uvec2& GetPosition() const;
-		void SetPosX(unsigned int x);
-		void SetPosY(unsigned int y);
-		void SetPosition(unsigned int x, unsigned int y);
+		void SetPosX(uint32_t x);
+		void SetPosY(uint32_t y);
+		void SetPosition(uint32_t x, uint32_t y);
 
 		const glm::uvec2& GetSize() const;
-		void SetWidth(unsigned int width);
-		void SetHeight(unsigned int height);
-		void SetSize(unsigned int width, unsigned int height);
+		void SetWidth(uint32_t width);
+		void SetHeight(uint32_t height);
+		void SetSize(uint32_t width, uint32_t height);
 
 		const std::string& GetTitle() const;
 		void SetTitle(std::string_view title);

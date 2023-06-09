@@ -15,7 +15,7 @@ namespace co
 		: m_Position(0, 0), m_Size(0, 0), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
 	{
 	}
-	Window::Window(unsigned int width, unsigned int height, std::string_view title)
+	Window::Window(uint32_t width, uint32_t height, std::string_view title)
 		: m_Position(50, 50), m_Size(width, height), m_Title(title), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
 	{
 		if (!glfwInit())
@@ -61,21 +61,21 @@ namespace co
 	{
 		return m_Position;
 	}
-	void Window::SetPosX(unsigned int x)
+	void Window::SetPosX(uint32_t x)
 	{
 		if (m_Position.x == x) return;
 
 		m_Position.x = x;
 		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
-	void Window::SetPosY(unsigned int y)
+	void Window::SetPosY(uint32_t y)
 	{
 		if (m_Position.y == y) return;
 
 		m_Position.x = y;
 		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
-	void Window::SetPosition(unsigned int x, unsigned int y)
+	void Window::SetPosition(uint32_t x, uint32_t y)
 	{
 		if (m_Position.x == x && m_Position.y == y) return;
 
@@ -87,21 +87,21 @@ namespace co
 	{
 		return m_Size;
 	}
-	void Window::SetWidth(unsigned int width)
+	void Window::SetWidth(uint32_t width)
 	{
 		if (m_Size.x == width) return;
 
 		m_Size.x = width;
 		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
-	void Window::SetHeight(unsigned int height)
+	void Window::SetHeight(uint32_t height)
 	{
 		if (m_Size.y == height) return;
 
 		m_Size.y = height;
 		glfwSetWindowSize(m_Window, m_Size.x, m_Size.y);
 	}
-	void Window::SetSize(unsigned int width, unsigned int height)
+	void Window::SetSize(uint32_t width, uint32_t height)
 	{
 		if (m_Size.x == width && m_Size.y == height) return;
 
@@ -149,7 +149,7 @@ namespace co
 	void Window::Clear(const Color& color)
 	{
 		glClearColor(static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f), static_cast<float>(color.A / 255.f));
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Advanced?
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 	std::string_view Window::GetHardWareInfo() const
 	{

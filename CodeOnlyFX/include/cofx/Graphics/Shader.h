@@ -15,14 +15,14 @@ namespace co
 	class Shader
 	{
 	private:
-		unsigned int m_Shader;
+		uint32_t m_Shader;
 	public:
 		Shader();
 		~Shader();
 
 		void Attach(std::string_view shaderCode, ShaderType type);
 
-		unsigned int GetRawShader() const;
+		uint32_t GetRawShader() const;
 		Shader& Bind();
 
 		void SetUniform(std::string_view name, bool value) const;
@@ -33,6 +33,6 @@ namespace co
 
 		void Cleanup();
 	private:
-		static unsigned int CompileShader(std::string_view shaderCode, ShaderType type);
+		static uint32_t CompileShader(std::string_view shaderCode, ShaderType type);
 	};
 }

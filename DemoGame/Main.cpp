@@ -12,15 +12,26 @@ int main()
 	co::Assets::Load("../../DemoGame/Assets/assets.json");
 	// Get flappy bird spritesheet.
 	auto& flappyBirdSheet = co::Assets::Get<co::Texture>("flappyBird");
-	flappyBirdSheet.GenerateMipmap();
+	flappyBirdSheet.Create().GenerateMipmap();
 
-	// Get first sprite of the spritesheet.
-	auto flappyBird = co::Texture(flappyBirdSheet, { 16, 16 }, { 0, 0 });
+	auto renderer = co::Renderer(window.GetSize());
 
-	auto renderer = co::Renderer(window);
+	std::vector<co::Texture> flappyBirdAnimation =
+	{
+		co::Texture(flappyBirdSheet, 16, { 0, 0 }),
+		co::Texture(flappyBirdSheet, 16, { 1, 0 }),
+		co::Texture(flappyBirdSheet, 16, { 2, 0 }),
+		co::Texture(flappyBirdSheet, 16, { 3, 0 }),
+	};
+	for (auto& sprite : flappyBirdAnimation)
+	{
+		sprite.Create();
+	}
 
 	// For deltatime.
 	co::Timer timer;
+
+	int i = 0;
 	// Game loop
 	while (window.IsRunning())
 	{
@@ -29,7 +40,7 @@ int main()
 		// Clear graphics and fills screen with given color.
 		window.Clear({ 79, 98, 128 });
 
-		renderer.Draw(flappyBird, { 200.f, 200.f }, { 96.f, 96.f }, co::Color::White, 0.f);
+		renderer.Draw(flappyBirdAnimation[i], { 200.f, 200.f }, flappyBirdAnimation[i].GetSize(), co::Color::White, 0.f);
 
 		// Get events & swap buffers
 		window.Update();

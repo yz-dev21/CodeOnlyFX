@@ -7,53 +7,28 @@ namespace co
 	Texture::Texture() : m_Texture(NULL), m_Size(0, 0)
 	{
 	}
-	Texture::Texture(unsigned int width, unsigned int height, std::span<unsigned int> rawImage) : m_Size(width, height)
+	Texture::Texture(uint32_t width, uint32_t height, std::span<uint32_t> rawImage) : m_Texture(NULL), m_Size(width, height)
 	{
 		m_Image.assign(rawImage.begin(), rawImage.end());
-
-		GenerateTexture();
 	}
-	Texture::Texture(const Texture& spriteSheet, const glm::uvec2& spriteSize, const glm::uvec2& position) : m_Size(spriteSize)
+	Texture::Texture(const Texture& spriteSheet, uint32_t spriteSize, const glm::uvec2& spritePos) : m_Texture(NULL), m_Size(spriteSize, spriteSize)
 	{
-		const int xp = position.x * spriteSize.x, yp = position.y * spriteSize.y;
+		const int xp = spritePos.x * spriteSize, yp = spritePos.y * spriteSize;
 
-		for (auto ty = 0; ty < spriteSize.y; ty++)
+		for (auto ty = 0; ty < spriteSize; ty++)
 		{
-			for (auto tx = 0; tx < spriteSize.x; tx++)
+			for (auto tx = 0; tx < spriteSize; tx++)
 			{
 				auto i = (xp + tx) + (yp + ty) * spriteSheet.GetSize().x;
-				unsigned int pixel = spriteSheet.GetImage()[i];
-				m_Image.push_back(pixel);
+				m_Image.push_back(spriteSheet.GetImage()[i]);
 			}
 		}
-		GenerateTexture();
 	}
 	Texture::~Texture()
 	{
 		Cleanup();
 	}
-	void Texture::Bind() const
-	{
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
-	}
-	void Texture::GenerateMipmap() const
-	{
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	const std::vector<unsigned int>& Texture::GetImage() const
-	{
-		return m_Image;
-	}
-	const glm::uvec2& Texture::GetSize() const
-	{
-		return m_Size;
-	}
-	void Texture::Cleanup()
-	{
-		if (m_Texture)
-			glDeleteTextures(1, &m_Texture);
-	}
-	void Texture::GenerateTexture()
+	Texture& Texture::Create()
 	{
 		glGenTextures(1, &m_Texture);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
@@ -65,5 +40,28 @@ namespace co
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+		return *this;
+	}
+	void Texture::Bind() const
+	{
+		glBindTexture(GL_TEXTURE_2D, m_Texture);
+	}
+	void Texture::GenerateMipmap() const
+	{
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	const std::vector<uint32_t>& Texture::GetImage() const
+	{
+		return m_Image;
+	}
+	const glm::uvec2& Texture::GetSize() const
+	{
+		return m_Size;
+	}
+	void Texture::Cleanup()
+	{
+		if (m_Texture)
+			glDeleteTextures(1, &m_Texture);
 	}
 }

@@ -32,11 +32,11 @@ static std::string GetText(std::string_view file)
 	}
 	return text;
 }
-static void GetImage(std::string_view file, int& width, int& height, std::vector<unsigned int>& image)
+static void GetImage(std::string_view file, int& width, int& height, std::vector<uint32_t>& image)
 {
 	int nrChannels;
 
-	unsigned int* data = (unsigned int*)stbi_load(file.data(), &width, &height, &nrChannels, STBI_rgb_alpha);
+	uint32_t* data = (uint32_t*)stbi_load(file.data(), &width, &height, &nrChannels, STBI_rgb_alpha);
 	if (!data)
 		return;
 	image.assign(data, data + width * height * STBI_rgb_alpha);
@@ -60,7 +60,7 @@ namespace co
 			case 1:
 			{
 				int width, height;
-				std::vector<unsigned int> image;
+				std::vector<uint32_t> image;
 
 				GetImage(object["file"].GetString(), width, height, image);
 

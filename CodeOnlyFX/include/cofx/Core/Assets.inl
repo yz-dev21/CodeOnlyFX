@@ -4,6 +4,11 @@ namespace co
 	std::map<std::string, std::unique_ptr<T>> Assets::m_Assets;
 
 	template<typename T>
+	void Assets::Add(std::string_view name, T& asset)
+	{
+		m_Assets<T>[std::string(name)] = asset;
+	}
+	template<typename T>
 	T& Assets::Get(std::string_view name)
 	{
 		return *m_Assets<T>[std::string(name)];
