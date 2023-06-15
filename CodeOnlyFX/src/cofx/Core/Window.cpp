@@ -57,6 +57,10 @@ namespace co
 	{
 		Cleanup();
 	}
+	GLFWwindow* Window::GetRawWindow() const
+	{
+		return m_Window;
+	}
 	const glm::uvec2& Window::GetPosition() const
 	{
 		return m_Position;

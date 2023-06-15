@@ -27,6 +27,8 @@ namespace co
 		Window(uint32_t width, uint32_t height, std::string_view title);
 		~Window();
 
+		GLFWwindow* GetRawWindow() const;
+
 		const glm::uvec2& GetPosition() const;
 		void SetPosX(uint32_t x);
 		void SetPosY(uint32_t y);

@@ -4,44 +4,32 @@
 
 namespace co
 {
-	Texture::Texture() : m_Texture(NULL), m_Size(0, 0)
+	Texture::Texture() : m_Texture(NULL)
 	{
 	}
-	Texture::Texture(uint32_t width, uint32_t height, std::span<uint32_t> rawImage) : m_Texture(NULL), m_Size(width, height)
+	Texture::Texture(const Image& image) : m_Texture(NULL), m_Image(image)
 	{
-		m_Image.assign(rawImage.begin(), rawImage.end());
+		Create();
 	}
-	Texture::Texture(const Texture& spriteSheet, uint32_t spriteSize, const glm::uvec2& spritePos) : m_Texture(NULL), m_Size(spriteSize, spriteSize)
+	Texture::Texture(const Image& spriteSheet, uint32_t spriteSize, const glm::uvec2& spritePos) : m_Texture(NULL)
 	{
+		m_Image.Size = { spriteSize, spriteSize };
+
 		const int xp = spritePos.x * spriteSize, yp = spritePos.y * spriteSize;
 
 		for (auto ty = 0; ty < spriteSize; ty++)
 		{
 			for (auto tx = 0; tx < spriteSize; tx++)
 			{
-				auto i = (xp + tx) + (yp + ty) * spriteSheet.GetSize().x;
-				m_Image.push_back(spriteSheet.GetImage()[i]);
+				auto i = (xp + tx) + (yp + ty) * spriteSheet.Size.x;
+				m_Image.Data.push_back(spriteSheet.Data[i]);
 			}
 		}
+		Create();
 	}
 	Texture::~Texture()
 	{
 		Cleanup();
-	}
-	Texture& Texture::Create()
-	{
-		glGenTextures(1, &m_Texture);
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Size.x, m_Size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image.data());
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		return *this;
 	}
 	void Texture::Bind() const
 	{
@@ -51,17 +39,26 @@ namespace co
 	{
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	const std::vector<uint32_t>& Texture::GetImage() const
+	const Image& Texture::GetImage() const
 	{
 		return m_Image;
-	}
-	const glm::uvec2& Texture::GetSize() const
-	{
-		return m_Size;
 	}
 	void Texture::Cleanup()
 	{
 		if (m_Texture)
 			glDeleteTextures(1, &m_Texture);
+	}
+	void Texture::Create()
+	{
+		glGenTextures(1, &m_Texture);
+		glBindTexture(GL_TEXTURE_2D, m_Texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Image.Size.x, m_Image.Size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image.Data.data());
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

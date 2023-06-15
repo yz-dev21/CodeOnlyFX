@@ -64,7 +64,7 @@ namespace co
 
 				GetImage(object["file"].GetString(), width, height, image);
 
-				m_Assets<Texture>[object["name"].GetString()] = std::make_unique<Texture>(width, height, image);
+				m_Assets<Image>[object["name"].GetString()] = std::make_unique<Image>(width, height, image);
 				break;
 			}
 			case 2:
