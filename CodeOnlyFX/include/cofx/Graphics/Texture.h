@@ -10,7 +10,6 @@ namespace co
 		unsigned int m_Texture;
 		Image m_Image;
 	public:
-		Texture();
 		Texture(const Image& image);
 		Texture(const Image& spriteSheet, uint32_t spriteSize, const glm::uvec2& spritePos);
 

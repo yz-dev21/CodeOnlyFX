@@ -1020,13 +1020,13 @@
     <ClInclude Include="include\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\cofx\System\Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\cofx\System\Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cofx\Input\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1471,10 +1471,10 @@
     <ClCompile Include="include\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cofx\System\Input.cpp">
+    <ClCompile Include="src\cofx\System\Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cofx\System\Audio.cpp">
+    <ClCompile Include="src\cofx\Input\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

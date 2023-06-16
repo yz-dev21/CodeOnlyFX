@@ -4,9 +4,6 @@
 
 namespace co
 {
-	Texture::Texture() : m_Texture(NULL)
-	{
-	}
 	Texture::Texture(const Image& image) : m_Texture(NULL), m_Image(image)
 	{
 		Create();

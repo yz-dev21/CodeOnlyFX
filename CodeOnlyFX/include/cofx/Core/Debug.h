@@ -15,10 +15,9 @@ namespace co
 	{
 	private:
 		static bool m_Init;
-	public:
-		Debug() = delete;
-		~Debug() = delete;
 
+		Debug();
+	public:
 		static bool Active;
 
 		static void Initialize();

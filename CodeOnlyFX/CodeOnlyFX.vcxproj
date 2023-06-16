@@ -196,8 +196,8 @@
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\Renderer.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
+    <ClInclude Include="include\cofx\Input\Keyboard.h" />
     <ClInclude Include="include\cofx\System\Audio.h" />
-    <ClInclude Include="include\cofx\System\Input.h" />
     <ClInclude Include="include\cofx\System\Timer.h" />
     <ClInclude Include="include\glm\common.hpp" />
     <ClInclude Include="include\glm\detail\compute_common.hpp" />
@@ -630,8 +630,8 @@
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
     <ClCompile Include="src\cofx\Graphics\Renderer.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
+    <ClCompile Include="src\cofx\Input\Keyboard.cpp" />
     <ClCompile Include="src\cofx\System\Audio.cpp" />
-    <ClCompile Include="src\cofx\System\Input.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
