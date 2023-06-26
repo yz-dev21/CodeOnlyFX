@@ -7,7 +7,7 @@ namespace co
 	class Texture
 	{
 	private:
-		unsigned int m_Texture;
+		uint32_t m_Texture;
 		Image m_Image;
 	public:
 		Texture(const Image& image);

@@ -11,6 +11,8 @@ namespace co
 	private:
 		template <typename T>
 		static std::map<std::string, std::unique_ptr<T>> m_Assets;
+
+		Assets();
 	public:
 		static void Load(std::string_view assetsPath);
 		template <typename T>

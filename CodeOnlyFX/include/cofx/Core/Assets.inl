@@ -1,5 +1,6 @@
 namespace co
 {
+	Assets::Assets() { }
 	template <typename T>
 	std::map<std::string, std::unique_ptr<T>> Assets::m_Assets;
 

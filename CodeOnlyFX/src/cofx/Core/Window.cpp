@@ -83,8 +83,7 @@ namespace co
 	{
 		if (m_Position.x == x && m_Position.y == y) return;
 
-		m_Position.x = x;
-		m_Position.y = y;
+		m_Position = { x, y };
 		glfwSetWindowPos(m_Window, m_Position.x, m_Position.y);
 	}
 	const glm::uvec2& Window::GetSize() const
@@ -146,11 +145,11 @@ namespace co
 		m_Resizable = resizable;
 		glfwSetWindowAttrib(m_Window, GLFW_RESIZABLE, m_Resizable);
 	}
-	void Window::SetVsync(bool vsync)
+	void Window::SetVsync(bool vsync) const
 	{
 		glfwSwapInterval(static_cast<int>(vsync));
 	}
-	void Window::Clear(const Color& color)
+	void Window::Clear(const Color& color) const
 	{
 		glClearColor(static_cast<float>(color.R / 255.f), static_cast<float>(color.G / 255.f), static_cast<float>(color.B / 255.f), static_cast<float>(color.A / 255.f));
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -160,7 +159,7 @@ namespace co
 		auto renderer = (const char*)glGetString(GL_RENDERER);
 		return renderer;
 	}
-	void Window::Close()
+	void Window::Close() const
 	{
 		glfwSetWindowShouldClose(m_Window, true);
 	}
@@ -173,7 +172,7 @@ namespace co
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}
-	void Window::Cleanup()
+	void Window::Cleanup() const
 	{
 		if (m_Window)
 		{
@@ -186,8 +185,7 @@ namespace co
 		auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 		if (!self.m_FullScreen)
 		{
-			self.m_Size.x = width;
-			self.m_Size.y = height;
+			self.m_Size = { width, height };
 		}
 		glViewport(0, 0, width, height);
 	}

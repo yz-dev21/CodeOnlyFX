@@ -45,15 +45,15 @@ namespace co
 		void SetFullScreen(bool fullScreen);
 		void SetResizable(bool resizable);
 
-		void SetVsync(bool vsync);
+		void SetVsync(bool vsync) const;
 
-		void Clear(const Color& color);
+		void Clear(const Color& color) const;
 		std::string_view GetHardWareInfo() const;
 
-		void Close();
+		void Close() const;
 		bool IsRunning() const;
 		void Update() const;
-		void Cleanup();
+		void Cleanup() const;
 	private:
 		static void GLFWFrameBufferSizeCallback(GLFWwindow* window, int width, int height);
 	};

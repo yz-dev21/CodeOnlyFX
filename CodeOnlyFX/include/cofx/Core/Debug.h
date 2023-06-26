@@ -26,6 +26,6 @@ namespace co
 		static void Warn(std::string_view str, const std::source_location& location = std::source_location::current());
 		static void Info(std::string_view str, const std::source_location& location = std::source_location::current());
 	private:
-		static void __stdcall GLFWDebugOutput(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* message, const void* userParam);
+		static void __stdcall GLFWDebugOutput(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int length, const char* message, const void* userParam);
 	};
 }

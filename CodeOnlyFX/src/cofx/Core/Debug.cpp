@@ -79,9 +79,9 @@ namespace co
 			location.function_name())
 			<< std::endl;
 	}
-	void Debug::GLFWDebugOutput(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* message, const void* userParam)
+	void Debug::GLFWDebugOutput(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int length, const char* message, const void* userParam)
 	{
-		if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return; // ignore these non-significant error codes
+		if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
 
 		switch (severity)
 		{
