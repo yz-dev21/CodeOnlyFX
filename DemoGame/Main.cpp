@@ -18,14 +18,9 @@ int main()
 
 	auto renderer = co::Renderer();
 
-	// For deltatime.
-	co::Timer timer;
-
 	// Game loop
 	while (window.IsRunning())
 	{
-		timer.Tick();
-
 		// Clear graphics and fills screen with given color.
 		window.Clear({ 79, 98, 128 });
 
@@ -33,7 +28,5 @@ int main()
 
 		// Get events & swap buffers
 		window.Update();
-
-		timer.Reset();
 	}
 }

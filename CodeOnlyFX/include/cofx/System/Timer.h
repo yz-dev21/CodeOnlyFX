@@ -7,18 +7,15 @@ namespace co
 	class Timer
 	{
 	private:
-		std::chrono::high_resolution_clock::time_point m_StartTime;
-		std::chrono::milliseconds m_DeltaTime;
-		float m_TimeScale;
+		std::chrono::steady_clock::time_point m_Now, m_Last;
 	public:
 		Timer();
 
+		const std::chrono::steady_clock::time_point& Now() const;
+		const std::chrono::steady_clock::time_point& Last() const;
 		void Reset();
 
-		float GetDeltaTime() const;
-
-		float GetTimeScale() const;
-		void SetTimeScale(float t = 1.f);
+		float GetElapsed() const;
 
 		void Tick();
 	};

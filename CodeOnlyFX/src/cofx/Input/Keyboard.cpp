@@ -2,9 +2,6 @@
 
 namespace co
 {
-	void Keyboard::Initialize(GLFWwindow* window)
-	{
-	}
 	bool Keyboard::IsKeyHeld()
 	{
 		return false;

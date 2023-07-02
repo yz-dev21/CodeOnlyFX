@@ -12,11 +12,11 @@ extern "C"
 namespace co
 {
 	Window::Window()
-		: m_Position(0, 0), m_Size(0, 0), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
+		: m_Position(0, 0), m_Size(0, 0), m_FullScreen(false), m_Resizable(true), m_FrameRate(0), m_Window(nullptr), m_Monitor(nullptr)
 	{
 	}
 	Window::Window(uint32_t width, uint32_t height, std::string_view title)
-		: m_Position(50, 50), m_Size(width, height), m_Title(title), m_FullScreen(false), m_Resizable(true), m_Window(nullptr), m_Monitor(nullptr)
+		: m_Position(50, 50), m_Size(width, height), m_Title(title), m_FullScreen(false), m_Resizable(true), m_FrameRate(0), m_Window(nullptr), m_Monitor(nullptr)
 	{
 		if (!glfwInit())
 		{
@@ -56,10 +56,6 @@ namespace co
 	Window::~Window()
 	{
 		Cleanup();
-	}
-	GLFWwindow* Window::GetRawWindow() const
-	{
-		return m_Window;
 	}
 	const glm::uvec2& Window::GetPosition() const
 	{
@@ -130,7 +126,7 @@ namespace co
 		if (m_FullScreen)
 		{
 			const GLFWvidmode* mode = glfwGetVideoMode(m_Monitor);
-			glfwSetWindowMonitor(m_Window, m_Monitor, 0, 0, mode->width, mode->height, 0);
+			glfwSetWindowMonitor(m_Window, m_Monitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
 		}
 		else
 		{
@@ -167,7 +163,7 @@ namespace co
 	{
 		return !glfwWindowShouldClose(m_Window);
 	}
-	void Window::Update() const
+	void Window::Update()
 	{
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();

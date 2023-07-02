@@ -4,6 +4,7 @@
 #include <utility>
 #include "../Graphics/Color.h"
 #include "../glm/vec2.hpp"
+#include "Input/Keyboard.h"
 
 struct GLFWwindow;
 struct GLFWmonitor;
@@ -19,6 +20,7 @@ namespace co
 
 		bool m_FullScreen;
 		bool m_Resizable;
+		uint32_t m_FrameRate;
 
 		GLFWwindow* m_Window;
 		GLFWmonitor* m_Monitor;
@@ -26,8 +28,6 @@ namespace co
 		Window();
 		Window(uint32_t width, uint32_t height, std::string_view title);
 		~Window();
-
-		GLFWwindow* GetRawWindow() const;
 
 		const glm::uvec2& GetPosition() const;
 		void SetPosX(uint32_t x);
@@ -52,7 +52,7 @@ namespace co
 
 		void Close() const;
 		bool IsRunning() const;
-		void Update() const;
+		void Update();
 		void Cleanup() const;
 	private:
 		static void GLFWFrameBufferSizeCallback(GLFWwindow* window, int width, int height);
