@@ -4,7 +4,6 @@
 #include <utility>
 #include "../Graphics/Color.h"
 #include "../glm/vec2.hpp"
-#include "Input/Keyboard.h"
 
 struct GLFWwindow;
 struct GLFWmonitor;

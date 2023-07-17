@@ -1,4 +1,5 @@
-#include "Core/Window.h"
+// Keyboard.h includes Window.h
+#include "Input/Keyboard.h"
 #include "Core/Debug.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -52,6 +53,7 @@ namespace co
 			return;
 		}
 		glfwSetFramebufferSizeCallback(m_Window, GLFWFrameBufferSizeCallback);
+		glfwSetKeyCallback(m_Window, Keyboard::GLFWKeyCallback);
 	}
 	Window::~Window()
 	{

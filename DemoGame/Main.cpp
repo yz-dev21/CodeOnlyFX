@@ -1,6 +1,5 @@
 #include "cofx/cofx.hpp"
-#include "glm/glm.hpp"
-#include "glm/ext/matrix_clip_space.hpp"
+#include <cofx/Input/Keyboard.h>
 
 int main()
 {
@@ -18,13 +17,27 @@ int main()
 
 	auto renderer = co::Renderer();
 
+	glm::vec2 pos = { 0.f, 0.f };
+
 	// Game loop
 	while (window.IsRunning())
 	{
 		// Clear graphics and fills screen with given color.
 		window.Clear({ 79, 98, 128 });
 
-		renderer.Draw(flappyBird, { 200.f, 200.f }, flappyBird.GetImage().Size, co::Color::White, 0.f);
+		renderer.Draw(flappyBird, pos, flappyBird.GetImage().Size, co::Color::White, 0.f);
+
+		if (co::Keyboard::IsKeyPressed(co::Key::Escape))
+			window.Close();
+
+		if (co::Keyboard::IsKeyPressed(co::Key::A))
+			pos.x -= 5.f;
+		if (co::Keyboard::IsKeyPressed(co::Key::D))
+			pos.x += 5.f;
+		if (co::Keyboard::IsKeyPressed(co::Key::W))
+			pos.y -= 5.f;
+		if (co::Keyboard::IsKeyPressed(co::Key::S))
+			pos.y += 5.f;
 
 		// Get events & swap buffers
 		window.Update();
