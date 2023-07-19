@@ -82,13 +82,12 @@ namespace co
 	void Debug::GLFWDebugOutput(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int length, const char* message, const void* userParam)
 	{
 		if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
-
 		switch (severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:         CO_CRITICAL("OpenGL error ({}); {}", id, message); break;
-		case GL_DEBUG_SEVERITY_MEDIUM:       CO_ERROR("OpenGL error ({}); {}", id, message);    break;
-		case GL_DEBUG_SEVERITY_LOW:          CO_WARN("OpenGL error ({}); {}", id, message);     break;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: CO_INFO("OpenGL error ({}); {}", id, message);     break;
+		case GL_DEBUG_SEVERITY_HIGH:         CO_CRITICAL("cofx::External::OpenGL; ({}) {}", id, message); break;
+		case GL_DEBUG_SEVERITY_MEDIUM:       CO_ERROR("cofx::External::OpenGL; ({}) {}", id, message);    break;
+		case GL_DEBUG_SEVERITY_LOW:          CO_WARN("cofx::External::OpenGL; ({}) {}", id, message);     break;
+		case GL_DEBUG_SEVERITY_NOTIFICATION: CO_INFO("cofx::External::OpenGL; ({}) {}", id, message);     break;
 		}
 	}
 }

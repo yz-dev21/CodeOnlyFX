@@ -1,22 +1,29 @@
 #pragma once
 
 #include "Shader.h"
-#include "Texture.h"
-#include "../glm/vec2.hpp"
+#include "Drawable.h"
 
 namespace co
 {
-	// 커스텀 렌더러, 스프라이트 렌더러, 텍스트 렌더러 등 여러 렌더링에 대한 작업을 한 클래스로 할지? 한다면 어떤 디자인으로 할지
 	class Renderer
 	{
 	private:
-		Shader m_Shader;
-		uint32_t m_QuadVAO;
-	public:
+		static Shader* m_Shader;
+		static uint32_t m_QuadVAO;
+		static bool m_Init;
+		static bool m_Pair;
+
 		Renderer();
 
-		void Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		static void Initialize();
+	public:
+		static void Begin();
+		static void Begin(Shader* shader);
 
-		void Draw(Texture& texture, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		static void End();
+
+		static void DrawRect(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		static void Draw(const Drawable& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		static void DrawString(/* rendering texts */);
 	};
 }

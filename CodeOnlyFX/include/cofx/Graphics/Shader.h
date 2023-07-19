@@ -22,7 +22,6 @@ namespace co
 
 		void Attach(std::string_view shaderCode, ShaderType type);
 
-		uint32_t GetRawShader() const;
 		Shader& Bind();
 
 		void SetUniform(std::string_view name, bool value) const;

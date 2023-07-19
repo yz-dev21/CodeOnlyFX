@@ -31,10 +31,6 @@ namespace co
 
 		glDeleteShader(shader);
 	}
-	uint32_t Shader::GetRawShader() const
-	{
-		return m_Shader;
-	}
 	Shader& Shader::Bind()
 	{
 		glUseProgram(m_Shader);
