@@ -2,11 +2,8 @@
 #include "Core/Window.h"
 #include <GLFW/glfw3.h>
 
-using KeyState = std::pair<int, int>;
+using KeyState = std::pair<bool, bool>;
 static std::map<int, KeyState> KeyMap;
-
-// first : current
-// second : previous
 
 namespace co
 {
@@ -14,33 +11,15 @@ namespace co
 	{
 		if (action == GLFW_REPEAT)
 		{
-			KeyMap[key].first = GLFW_PRESS;
-			KeyMap[key].second = GLFW_PRESS;
+			KeyMap[key].first = true;
+			KeyMap[key].second = true;
 			return;
 		}
 
 		KeyMap[key].second = KeyMap[key].first;
-		KeyMap[key].first = action;
+		KeyMap[key].first = action != GLFW_RELEASE;
 	}
-	bool Keyboard::IsKeyDown(Key key)
-	{
-		int code = static_cast<int>(key);
-
-		auto it = KeyMap.find(code);
-		if (it != KeyMap.end())
-		{
-			return KeyMap.at(code).first == GLFW_PRESS;
-		}
-		// If the key is not registered yet - it means it was not pressed before, so we can add the key as fully released one.
-		else
-		{
-			KeyMap[code].first = GLFW_RELEASE;
-			KeyMap[code].second = GLFW_RELEASE;
-
-			return false;
-		}
-	}
-	bool Keyboard::IsKeyUp(Key key)
+	bool Keyboard::IsKeyHeld(Key key)
 	{
 		int code = static_cast<int>(key);
 
@@ -48,15 +27,10 @@ namespace co
 		if (it != KeyMap.end())
 		{
 			auto& state = KeyMap.at(code);
-			return state.first == GLFW_RELEASE;
+			return state.first && state.second;
 		}
 		else
-		{
-			KeyMap[code].first = GLFW_RELEASE;
-			KeyMap[code].second = GLFW_RELEASE;
-
 			return false;
-		}
 	}
 	bool Keyboard::IsKeyPressed(Key key)
 	{
@@ -66,21 +40,10 @@ namespace co
 		if (it != KeyMap.end())
 		{
 			auto& state = KeyMap.at(code);
-
-			if ((state.first == GLFW_PRESS) && (state.second == GLFW_RELEASE))
-			{
-				state.first = GLFW_RELEASE;
-				return true;
-			}
-			return false;
+			return state.first && !state.second;
 		}
 		else
-		{
-			KeyMap[code].first = GLFW_RELEASE;
-			KeyMap[code].second = GLFW_RELEASE;
-
 			return false;
-		}
 	}
 	bool Keyboard::IsKeyReleased(Key key)
 	{
@@ -90,20 +53,9 @@ namespace co
 		if (it != KeyMap.end())
 		{
 			auto& state = KeyMap.at(code);
-
-			if ((state.first == GLFW_RELEASE) && (state.second == GLFW_PRESS))
-			{
-				state.second = GLFW_RELEASE;
-				return true;
-			}
-			return false;
+			return !state.first && state.second;
 		}
 		else
-		{
-			KeyMap[code].first = GLFW_RELEASE;
-			KeyMap[code].second = GLFW_RELEASE;
-
 			return false;
-		}
 	}
 }

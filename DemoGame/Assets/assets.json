@@ -4,12 +4,6 @@
       "name": "flappyBird",
       "file": "../../DemoGame/Assets/Player/bird1.png",
       "type": 1
-    },
-    {
-      "name": "reversed",
-      "vertex": "../../DemoGame/Assets/Shaders/reversed.vert",
-      "fragment": "../../DemoGame/Assets/Shaders/reversed.frag",
-      "type": 2
     }
   ]
 }

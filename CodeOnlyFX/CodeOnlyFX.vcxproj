@@ -192,6 +192,7 @@
     <ClInclude Include="include\cofx\Core\Debug.h" />
     <ClInclude Include="include\cofx\Core\Window.h" />
     <ClInclude Include="include\cofx\Graphics\Color.h" />
+    <ClInclude Include="include\cofx\Graphics\Drawable.h" />
     <ClInclude Include="include\cofx\Graphics\Image.h" />
     <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\Renderer.h" />

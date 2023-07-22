@@ -1029,6 +1029,9 @@
     <ClInclude Include="include\cofx\Input\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\cofx\Graphics\Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\cofx\Core\Assets.inl">

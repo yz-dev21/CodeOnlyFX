@@ -1,12 +1,11 @@
 #pragma once
 
 #include "Image.h"
-#include "../glm/vec2.hpp"
-#include "../Graphics/Color.h"
+#include "Drawable.h"
 
 namespace co
 {
-	class Texture
+	class Texture : public Drawable
 	{
 	private:
 		uint32_t m_Texture;
@@ -17,13 +16,12 @@ namespace co
 
 		~Texture();
 
-		void Bind() const;
+		void Bind() const override;
 		void GenerateMipmap() const;
 
 		const Image& GetImage() const;
 
-		void Draw(const glm::vec2& position);
-		void Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		void Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate) override;
 
 		void Cleanup();
 	private:

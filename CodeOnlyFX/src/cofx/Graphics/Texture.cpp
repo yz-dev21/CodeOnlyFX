@@ -1,4 +1,4 @@
-// Renderer.h includes Texture.h
+#include "Graphics/Texture.h"
 #include "Graphics/Renderer.h"
 #include "Core/Debug.h"
 #include <GL/glew.h>
@@ -40,10 +40,6 @@ namespace co
 	const Image& Texture::GetImage() const
 	{
 		return m_Image;
-	}
-	void Texture::Draw(const glm::vec2& position)
-	{
-		Renderer::Draw(*this, position, m_Image.Size, Color::White, 0.f);
 	}
 	void Texture::Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{

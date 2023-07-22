@@ -140,7 +140,7 @@ void main()
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 	}
-	void Renderer::Draw(const Texture& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
+	void Renderer::Draw(const Drawable& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
 		if (!m_Pair)
 		{
