@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Shader.h"
-#include "Drawable.h"
+#include "Texture.h"
 
 namespace co
 {
@@ -23,7 +23,7 @@ namespace co
 		static void End();
 
 		static void DrawRect(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
-		static void Draw(const Drawable& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
+		static void Draw(const Texture& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
 		static void DrawString(/* rendering texts */);
 	};
 }
