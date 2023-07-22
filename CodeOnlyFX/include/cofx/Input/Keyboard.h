@@ -87,7 +87,8 @@ namespace co
 
 		friend class Window;
 	public:
-		static bool IsKeyHeld(Key key);
+		static bool IsKeyDown(Key key);
+		static bool IsKeyUp(Key key);
 		static bool IsKeyPressed(Key key);
 		static bool IsKeyReleased(Key key);
 	};
