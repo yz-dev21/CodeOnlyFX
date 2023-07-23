@@ -81,15 +81,15 @@ namespace co
 
 	class Keyboard
 	{
-	private:
-		Keyboard();
-		static void GLFWKeyCallback(GLFWwindow* window, int key, int scanCode, int action, int mode);
-
-		friend class Window;
 	public:
 		static bool IsKeyDown(Key key);
 		static bool IsKeyUp(Key key);
 		static bool IsKeyPressed(Key key);
 		static bool IsKeyReleased(Key key);
+	private:
+		Keyboard();
+		static void GLFWKeyCallback(GLFWwindow* window, int key, int scanCode, int action, int mode);
+
+		friend class Window;
 	};
 }

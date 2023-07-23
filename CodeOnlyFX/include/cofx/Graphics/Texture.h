@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Image.h"
-#include "../glm/vec2.hpp"
+#include <glm/vec2.hpp>
 #include "../Graphics/Color.h"
 
 namespace co

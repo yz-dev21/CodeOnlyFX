@@ -1,7 +1,7 @@
 #include "Graphics/Renderer.h"
-#include "../glm/mat4x4.hpp"
-#include "../glm/ext/matrix_transform.hpp"
-#include "../glm/ext/matrix_clip_space.hpp"
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Core/Debug.h"
@@ -16,6 +16,44 @@ namespace co
 	Renderer::Renderer() { }
 
 	void Renderer::Initialize()
+	{
+		if (m_Shader == nullptr) AssignDefaultShader();
+
+		m_Shader->Bind().SetUniform("image", 0);
+
+		int iViewport[4];
+		glGetIntegerv(GL_VIEWPORT, iViewport);
+
+		glm::mat4 projection = glm::ortho<float>(0.f, iViewport[2], iViewport[3], 0.f, -1.f, 1.f);
+		m_Shader->SetUniform("projection", projection);
+
+		unsigned int VBO;
+		float vertices[] = {
+			// pos      // tex
+			0.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 0.0f,
+
+			0.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 0.0f, 1.0f, 0.0f
+		};
+
+		glGenVertexArrays(1, &m_QuadVAO);
+		glGenBuffers(1, &VBO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glBindVertexArray(m_QuadVAO);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+
+		m_Init = true;
+	}
+	void Renderer::AssignDefaultShader()
 	{
 		const std::string vertexCode = R"(
 #version 330 core
@@ -57,40 +95,6 @@ void main()
 
 		m_Shader->Attach(vertexCode, ShaderType::Vertex);
 		m_Shader->Attach(fragmentCode, ShaderType::Fragment);
-
-		m_Shader->Bind().SetUniform("image", 0);
-
-		int iViewport[4];
-		glGetIntegerv(GL_VIEWPORT, iViewport);
-
-		glm::mat4 projection = glm::ortho<float>(0.f, iViewport[2], iViewport[3], 0.f, -1.f, 1.f);
-		m_Shader->SetUniform("projection", projection);
-
-		unsigned int VBO;
-		float vertices[] = {
-			// pos      // tex
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 0.0f,
-
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f
-		};
-
-		glGenVertexArrays(1, &m_QuadVAO);
-		glGenBuffers(1, &VBO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		glBindVertexArray(m_QuadVAO);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-
-		m_Init = true;
 	}
 	void Renderer::Begin()
 	{
@@ -99,9 +103,9 @@ void main()
 	}
 	void Renderer::Begin(Shader* shader)
 	{
-		if (!m_Init) Initialize();
-
 		m_Shader = shader;
+
+		if (!m_Init) Initialize();
 
 		m_Pair = true;
 	}

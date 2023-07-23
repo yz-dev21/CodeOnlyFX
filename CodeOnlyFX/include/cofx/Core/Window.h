@@ -3,7 +3,7 @@
 #include <string>
 #include <utility>
 #include "../Graphics/Color.h"
-#include "../glm/vec2.hpp"
+#include <glm/vec2.hpp>
 
 struct GLFWwindow;
 struct GLFWmonitor;

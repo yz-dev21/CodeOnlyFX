@@ -10,7 +10,8 @@ void main()
 {
     if (useTex)
     {
-        color = vec4(spriteColor, 1.0) * texture(image, TexCoords);
+        color = texture(image, TexCoords);
+        color = vec4(1.0 - color.rgb, color.a);
         if (color.a == 0)
             discard;
     }

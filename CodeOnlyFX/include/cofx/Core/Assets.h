@@ -11,8 +11,6 @@ namespace co
 	private:
 		template <typename T>
 		static std::map<std::string, std::unique_ptr<T>> m_Assets;
-
-		Assets();
 	public:
 		static void Load(std::string_view assetsPath);
 		template <typename T>
@@ -23,6 +21,8 @@ namespace co
 		static T& Get(std::string_view name);
 		template <typename T>
 		static void Clear();
+	private:
+		Assets();
 	};
 }
 #include "Assets.inl"

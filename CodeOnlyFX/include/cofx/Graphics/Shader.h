@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Color.h"
-#include "../glm/mat4x4.hpp"
+#include <glm/mat4x4.hpp>
 
 namespace co
 {
