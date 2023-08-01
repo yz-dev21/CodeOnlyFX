@@ -25,6 +25,5 @@ namespace co
 		Renderer();
 
 		static void Initialize();
-		static void AssignDefaultShader();
 	};
 }

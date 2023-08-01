@@ -141,7 +141,6 @@
   <ItemGroup>
     <None Include="Assets\assets.json" />
     <None Include="Assets\Shaders\reversed.frag" />
-    <None Include="Assets\Shaders\reversed.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

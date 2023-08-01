@@ -16,11 +16,17 @@ namespace co
 	{
 	private:
 		uint32_t m_Shader;
+
+		bool m_VertexAttached;
+		bool m_FragmentAttached;
+		bool m_GeometryAttached;
 	public:
 		Shader();
 		~Shader();
 
 		void Attach(std::string_view shaderCode, ShaderType type);
+
+		void FillDefaultShaders();
 
 		Shader& Bind();
 

@@ -17,15 +17,18 @@ namespace co
 
 	void Renderer::Initialize()
 	{
-		if (m_Shader == nullptr) AssignDefaultShader();
+		if (m_Shader == nullptr)
+			m_Shader = new Shader();
 
-		m_Shader->Bind().SetUniform("image", 0);
+		m_Shader->FillDefaultShaders();
+
+		m_Shader->Bind().SetUniform("coImage", 0);
 
 		int iViewport[4];
 		glGetIntegerv(GL_VIEWPORT, iViewport);
 
 		glm::mat4 projection = glm::ortho<float>(0.f, iViewport[2], iViewport[3], 0.f, -1.f, 1.f);
-		m_Shader->SetUniform("projection", projection);
+		m_Shader->SetUniform("coProjection", projection);
 
 		unsigned int VBO;
 		float vertices[] = {
@@ -53,49 +56,6 @@ namespace co
 
 		m_Init = true;
 	}
-	void Renderer::AssignDefaultShader()
-	{
-		const std::string vertexCode = R"(
-#version 330 core
-layout (location = 0) in vec4 vertex;
-
-out vec2 TexCoords;
-
-uniform mat4 model;
-uniform mat4 projection;
-
-void main()
-{
-    TexCoords = vertex.zw;
-    gl_Position = projection * model * vec4(vertex.xy, 0.0, 1.0);
-}
-)";
-		const std::string fragmentCode = R"(
-#version 330 core
-in vec2 TexCoords;
-out vec4 color;
-
-uniform sampler2D image;
-uniform vec3 spriteColor;
-uniform bool useTex;
-
-void main()
-{
-    if (useTex)
-    {
-        color = vec4(spriteColor, 1.0) * texture(image, TexCoords);
-        if (color.a == 0)
-            discard;
-    }
-    else
-        color = vec4(spriteColor, 1.0);
-}  
-)";
-		m_Shader = new Shader();
-
-		m_Shader->Attach(vertexCode, ShaderType::Vertex);
-		m_Shader->Attach(fragmentCode, ShaderType::Fragment);
-	}
 	void Renderer::Begin()
 	{
 		if (!m_Init) Initialize();
@@ -120,7 +80,7 @@ void main()
 			Debug::Warn("cofx::Graphics::Renderer; Renderer::DrawRect must be between Renderer::Begin and Renderer::End pairs.");
 			return;
 		}
-		m_Shader->Bind().SetUniform("useTex", false);
+		m_Shader->Bind().SetUniform("coUseTex", false);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -137,8 +97,8 @@ void main()
 		// Scale
 		model = glm::scale(model, glm::vec3(size, 1.0f));
 
-		m_Shader->SetUniform("model", model);
-		m_Shader->SetUniform("spriteColor", color);
+		m_Shader->SetUniform("coModel", model);
+		m_Shader->SetUniform("coSpriteColor", color);
 
 		glBindVertexArray(m_QuadVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -151,7 +111,7 @@ void main()
 			Debug::Warn("cofx::Graphics::Renderer; Renderer::Draw must be between Renderer::Begin and Renderer::End pairs.");
 			return;
 		}
-		m_Shader->Bind().SetUniform("useTex", true);
+		m_Shader->Bind().SetUniform("coUseTex", true);
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -168,8 +128,8 @@ void main()
 		// Scale
 		model = glm::scale(model, glm::vec3(size, 1.0f));
 
-		m_Shader->SetUniform("model", model);
-		m_Shader->SetUniform("spriteColor", color);
+		m_Shader->SetUniform("coModel", model);
+		m_Shader->SetUniform("coSpriteColor", color);
 
 		glActiveTexture(GL_TEXTURE0);
 		target.Bind();

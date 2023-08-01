@@ -13,7 +13,7 @@ int main()
 
 	// Get flappy bird spritesheet.
 	auto& flappyBirdSheet = co::Assets::Get<co::Image>("flappyBird");
-	auto flappyBird = co::Texture(flappyBirdSheet);
+	auto flappyBird = co::Texture(flappyBirdSheet, 16, { 0, 0 });
 
 	auto& reversed = co::Assets::Get<co::Shader>("reversed");
 
@@ -24,7 +24,7 @@ int main()
 	{
 		window.Clear({ 79, 98, 128 });
 
-		co::Renderer::Begin();
+		co::Renderer::Begin(&reversed);
 
 		/* method 1: */ //co::Renderer::Draw(flappyBird, pos, flappyBird.GetImage().Size, co::Color::White, 0.f);
 		/* method 2: */ flappyBird.Draw(pos);
@@ -49,7 +49,6 @@ int main()
 }
 
 /*
-Move glm to external.
 Think more about custom shaders.
-씨발 진짜
+커스텀 셰이더를 vertex 없이 추가할 수 있게 디폴트 셰이더를 추가하는 기능을 넣자.
 */
