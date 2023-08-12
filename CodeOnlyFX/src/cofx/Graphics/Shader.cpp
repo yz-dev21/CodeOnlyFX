@@ -4,7 +4,7 @@
 
 namespace co
 {
-	Shader::Shader() : m_Shader(NULL), m_VertexAttached(false), m_FragmentAttached(false), m_GeometryAttached(false)
+	Shader::Shader() : m_Shader(NULL)
 	{
 	}
 	Shader::~Shader()
@@ -30,66 +30,6 @@ namespace co
 		}
 
 		glDeleteShader(shader);
-
-		switch (type)
-		{
-		case ShaderType::Vertex:
-			m_VertexAttached = true;
-			break;
-		case ShaderType::Fragment:
-			m_FragmentAttached = true;
-			break;
-		case ShaderType::Geometry:
-			m_GeometryAttached = true;
-			break;
-		}
-	}
-	void Shader::FillDefaultShaders()
-	{
-		if (!m_VertexAttached)
-		{
-			const std::string vertexCode = R"(
-#version 330 core
-layout (location = 0) in vec4 coVertex;
-
-out vec2 coTexCoords;
-
-uniform mat4 coModel;
-uniform mat4 coProjection;
-
-void main()
-{
-    coTexCoords = coVertex.zw;
-    gl_Position = coProjection * coModel * vec4(coVertex.xy, 0.0, 1.0);
-}
-)";
-			Attach(vertexCode, ShaderType::Vertex);
-		}
-		if (!m_FragmentAttached)
-		{
-			const std::string fragmentCode = R"(
-#version 330 core
-in vec2 coTexCoords;
-out vec4 coColor;
-
-uniform sampler2D coImage;
-uniform vec3 coSpriteColor;
-uniform bool coUseTex;
-
-void main()
-{
-    if (coUseTex)
-    {
-        coColor = vec4(coSpriteColor, 1.0) * texture(coImage, coTexCoords);
-        if (coColor.a == 0)
-            discard;
-    }
-    else
-        coColor = vec4(coSpriteColor, 1.0);
-}  
-)";
-			Attach(fragmentCode, ShaderType::Fragment);
-		}
 	}
 	Shader& Shader::Bind()
 	{

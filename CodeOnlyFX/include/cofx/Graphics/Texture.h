@@ -22,9 +22,6 @@ namespace co
 
 		const Image& GetImage() const;
 
-		void Draw(const glm::vec2& position);
-		void Draw(const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
-
 		void Cleanup();
 	private:
 		void Create();

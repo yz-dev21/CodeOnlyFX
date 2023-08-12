@@ -112,7 +112,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -136,13 +136,68 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="external\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="external\include\freetype\config\ftheader.h" />
+    <ClInclude Include="external\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="external\include\freetype\config\ftoption.h" />
+    <ClInclude Include="external\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="external\include\freetype\config\integer-types.h" />
+    <ClInclude Include="external\include\freetype\config\mac-support.h" />
+    <ClInclude Include="external\include\freetype\config\public-macros.h" />
+    <ClInclude Include="external\include\freetype\freetype.h" />
+    <ClInclude Include="external\include\freetype\ftadvanc.h" />
+    <ClInclude Include="external\include\freetype\ftbbox.h" />
+    <ClInclude Include="external\include\freetype\ftbdf.h" />
+    <ClInclude Include="external\include\freetype\ftbitmap.h" />
+    <ClInclude Include="external\include\freetype\ftbzip2.h" />
+    <ClInclude Include="external\include\freetype\ftcache.h" />
+    <ClInclude Include="external\include\freetype\ftchapters.h" />
+    <ClInclude Include="external\include\freetype\ftcid.h" />
+    <ClInclude Include="external\include\freetype\ftcolor.h" />
+    <ClInclude Include="external\include\freetype\ftdriver.h" />
+    <ClInclude Include="external\include\freetype\fterrdef.h" />
+    <ClInclude Include="external\include\freetype\fterrors.h" />
+    <ClInclude Include="external\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="external\include\freetype\ftgasp.h" />
+    <ClInclude Include="external\include\freetype\ftglyph.h" />
+    <ClInclude Include="external\include\freetype\ftgxval.h" />
+    <ClInclude Include="external\include\freetype\ftgzip.h" />
+    <ClInclude Include="external\include\freetype\ftimage.h" />
+    <ClInclude Include="external\include\freetype\ftincrem.h" />
+    <ClInclude Include="external\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="external\include\freetype\ftlist.h" />
+    <ClInclude Include="external\include\freetype\ftlogging.h" />
+    <ClInclude Include="external\include\freetype\ftlzw.h" />
+    <ClInclude Include="external\include\freetype\ftmac.h" />
+    <ClInclude Include="external\include\freetype\ftmm.h" />
+    <ClInclude Include="external\include\freetype\ftmodapi.h" />
+    <ClInclude Include="external\include\freetype\ftmoderr.h" />
+    <ClInclude Include="external\include\freetype\ftotval.h" />
+    <ClInclude Include="external\include\freetype\ftoutln.h" />
+    <ClInclude Include="external\include\freetype\ftparams.h" />
+    <ClInclude Include="external\include\freetype\ftpfr.h" />
+    <ClInclude Include="external\include\freetype\ftrender.h" />
+    <ClInclude Include="external\include\freetype\ftsizes.h" />
+    <ClInclude Include="external\include\freetype\ftsnames.h" />
+    <ClInclude Include="external\include\freetype\ftstroke.h" />
+    <ClInclude Include="external\include\freetype\ftsynth.h" />
+    <ClInclude Include="external\include\freetype\ftsystem.h" />
+    <ClInclude Include="external\include\freetype\fttrigon.h" />
+    <ClInclude Include="external\include\freetype\fttypes.h" />
+    <ClInclude Include="external\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="external\include\freetype\otsvg.h" />
+    <ClInclude Include="external\include\freetype\t1tables.h" />
+    <ClInclude Include="external\include\freetype\ttnameid.h" />
+    <ClInclude Include="external\include\freetype\tttables.h" />
+    <ClInclude Include="external\include\freetype\tttags.h" />
+    <ClInclude Include="external\include\ft2build.h" />
     <ClInclude Include="external\include\GLFW\glfw3.h" />
     <ClInclude Include="external\include\GL\eglew.h" />
     <ClInclude Include="external\include\GL\glew.h" />
@@ -193,8 +248,12 @@
     <ClInclude Include="include\cofx\Core\Window.h" />
     <ClInclude Include="include\cofx\Graphics\Color.h" />
     <ClInclude Include="include\cofx\Graphics\Image.h" />
-    <ClInclude Include="include\cofx\Graphics\Shader.h" />
     <ClInclude Include="include\cofx\Graphics\Renderer.h" />
+    <ClInclude Include="include\cofx\Graphics\Shader.h" />
+    <ClInclude Include="include\cofx\Graphics\ShapeRenderer.h" />
+    <ClInclude Include="include\cofx\Graphics\SpriteRenderer.h" />
+    <ClInclude Include="include\cofx\Graphics\Text.h" />
+    <ClInclude Include="include\cofx\Graphics\TextRenderer.h" />
     <ClInclude Include="include\cofx\Graphics\Texture.h" />
     <ClInclude Include="include\cofx\Input\Keyboard.h" />
     <ClInclude Include="include\cofx\System\Audio.h" />
@@ -628,13 +687,15 @@
     <ClCompile Include="src\cofx\Core\Debug.cpp" />
     <ClCompile Include="src\cofx\Core\Window.cpp" />
     <ClCompile Include="src\cofx\Graphics\Shader.cpp" />
-    <ClCompile Include="src\cofx\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\cofx\Graphics\SpriteRenderer.cpp" />
+    <ClCompile Include="src\cofx\Graphics\Text.cpp" />
     <ClCompile Include="src\cofx\Graphics\Texture.cpp" />
     <ClCompile Include="src\cofx\Input\Keyboard.cpp" />
     <ClCompile Include="src\cofx\System\Audio.cpp" />
     <ClCompile Include="src\cofx\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="external\lib\freetype.lib" />
     <Library Include="external\lib\glew32s.lib" />
     <Library Include="external\lib\glfw3.lib" />
   </ItemGroup>
