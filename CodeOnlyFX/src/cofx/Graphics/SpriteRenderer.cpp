@@ -8,6 +8,8 @@
 
 namespace co
 {
+	uint32_t Renderer::m_InitCode = NULL;
+
 	SpriteRenderer::SpriteRenderer() : Renderer()
 	{
 		m_Shader = new Shader();
@@ -47,15 +49,31 @@ void main()
 }
 )";
 		m_Shader->Attach(fragmentCode, ShaderType::Fragment);
-
 		Initialize();
 	}
 	SpriteRenderer::SpriteRenderer(Shader* shader) : Renderer(shader)
 	{
+		if (shader == nullptr)
+		{
+			Debug::Warn("cofx::Graphics::SpriteRenderer; Given shader is null.");
+			SpriteRenderer();
+		}
 		Initialize();
+	}
+	void SpriteRenderer::Begin()
+	{
+		if (m_InitCode != m_Shader->GetRawShader())
+			Initialize();
+
+		m_Pair = true;
 	}
 	void SpriteRenderer::Draw(const Texture& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate)
 	{
+		if (!m_Pair)
+		{
+			Debug::Warn("cofx::Graphics::SpriteRenderer; Draw() must be called between Begin() and End() pairs.");
+			return;
+		}
 		glm::mat4 model = glm::mat4(1.0f);
 
 		// Move
@@ -119,5 +137,7 @@ void main()
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
+
+		m_InitCode = m_Shader->GetRawShader();
 	}
 }

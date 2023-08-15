@@ -12,6 +12,8 @@ namespace co
 		SpriteRenderer();
 		SpriteRenderer(Shader* shader);
 
+		void Begin() override;
+
 		void Draw(const Texture& target, const glm::vec2& position, const glm::vec2& size, const Color& color, float rotate);
 		void Draw(const Texture& target, const glm::vec2& position);
 	private:

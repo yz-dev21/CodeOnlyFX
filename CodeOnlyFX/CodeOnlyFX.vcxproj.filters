@@ -1020,9 +1020,6 @@
     <ClInclude Include="external\include\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\cofx\System\Audio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1204,6 +1201,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cofx\Graphics\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\al.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\alc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\alext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\efx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\efx-creative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\include\AL\efx-presets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cofx\Audio\SoundPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cofx\Audio\SoundBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1648,13 +1669,13 @@
     <ClCompile Include="external\include\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cofx\System\Audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cofx\Input\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cofx\Graphics\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cofx\Graphics\TextRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1662,5 +1683,6 @@
     <Library Include="external\lib\glew32s.lib" />
     <Library Include="external\lib\glfw3.lib" />
     <Library Include="external\lib\freetype.lib" />
+    <Library Include="external\lib\OpenAL32.lib" />
   </ItemGroup>
 </Project>

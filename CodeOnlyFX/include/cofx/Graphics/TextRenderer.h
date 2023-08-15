@@ -12,6 +12,5 @@ namespace co
 
 		void DrawString();
 	private:
-		void Initialize() override;
 	};
 }

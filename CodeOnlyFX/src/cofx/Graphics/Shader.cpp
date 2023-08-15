@@ -36,6 +36,10 @@ namespace co
 		glUseProgram(m_Shader);
 		return *this;
 	}
+	uint32_t Shader::GetRawShader() const
+	{
+		return m_Shader;
+	}
 	void Shader::SetUniform(std::string_view name, bool value) const
 	{
 		glUniform1i(glGetUniformLocation(m_Shader, name.data()), static_cast<int>(value));

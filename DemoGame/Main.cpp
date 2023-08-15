@@ -15,18 +15,25 @@ int main()
 	auto& flappyBirdSheet = co::Assets::Get<co::Image>("flappyBird");
 	auto flappyBird = co::Texture(flappyBirdSheet, 16, { 0, 0 });
 
-	//auto& reversed = co::Assets::Get<co::Shader>("reversed");
+	auto& reversedShader = co::Assets::Get<co::Shader>("reversed");
 
 	glm::vec2 pos = { 0.f, 0.f };
 
 	auto sprite = co::SpriteRenderer();
+	auto reversed = co::SpriteRenderer(&reversedShader);
 
 	// Game loop
 	while (window.IsRunning())
 	{
 		window.Clear({ 79, 98, 128 });
 
+		sprite.Begin();
 		sprite.Draw(flappyBird, pos);
+		sprite.End();
+
+		reversed.Begin();
+		reversed.Draw(flappyBird, { pos.x + 50.f, pos.y + 50.f });
+		reversed.End();
 
 		if (co::Keyboard::IsKeyPressed(co::Key::Escape))
 			window.Close();

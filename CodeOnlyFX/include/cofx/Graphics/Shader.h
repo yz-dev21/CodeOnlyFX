@@ -24,6 +24,8 @@ namespace co
 
 		Shader& Bind();
 
+		uint32_t GetRawShader() const;
+
 		void SetUniform(std::string_view name, bool value) const;
 		void SetUniform(std::string_view name, int value) const;
 		void SetUniform(std::string_view name, float value) const;
